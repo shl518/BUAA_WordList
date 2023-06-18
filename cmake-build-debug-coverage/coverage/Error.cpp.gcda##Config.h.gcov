@@ -1,0 +1,105 @@
+        -:    0:Source:F:/develop/src/preprocess/Config.h
+        -:    0:Graph:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\error\Error.cpp.gcno
+        -:    0:Data:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\error\Error.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by cychen on 2023/3/8.
+        -:    3://
+        -:    4:
+        -:    5:#ifndef LIST_CONFIG_H
+        -:    6:#define LIST_CONFIG_H
+        -:    7:#include <string>
+        -:    8:#include <ostream>
+        -:    9:using namespace std;
+        -:   10:
+        -:   11:enum configs {
+        -:   12:    empty,
+        -:   13:    num,
+        -:   14:    word_count,
+        -:   15:    char_count,
+        -:   16:};
+        -:   17:
+        -:   18:class Config {
+        -:   19:private:
+        -:   20:    static Config *instance;
+        -:   21:    bool ring = false;
+        -:   22:    int headLimit = -1;
+        -:   23:    int tailLimit = -1;
+        -:   24:    int rejectLimit = -1;
+        -:   25:    configs state = empty;
+        -:   26:    string filePath;
+        -:   27:
+        -:   28:    Config() = default;
+        -:   29:
+        -:   30:public:
+        -:   31:    static Config* getInstance();
+        -:   32:
+        -:   33:    void setRing(bool _ring) {
+        -:   34:        Config::ring = _ring;
+        -:   35:    }
+        -:   36:
+        -:   37:    void setHeadLimit(int _headLimit) {
+        -:   38:        Config::headLimit = _headLimit;
+        -:   39:    }
+        -:   40:
+        -:   41:    void setTailLimit(int _tailLimit) {
+        -:   42:        Config::tailLimit = _tailLimit;
+        -:   43:    }
+        -:   44:
+        -:   45:    void setRejectLimit(int _rejectLimit) {
+        -:   46:        Config::rejectLimit = _rejectLimit;
+        -:   47:    }
+        -:   48:
+        -:   49:    void setState(configs _state) {
+        -:   50:        Config::state = _state;
+        -:   51:    }
+        -:   52:
+        -:   53:    void setFilePath(const string &_filePath) {
+        -:   54:        Config::filePath = _filePath;
+        -:   55:    }
+        -:   56:
+        -:   57:
+        -:   58:    const string &getFilePath() const {
+        -:   59:        return filePath;
+        -:   60:    }
+        -:   61:
+function _ZNK6Config6isRingEv called 0 returned 0% blocks executed 0%
+    #####:   62:    bool isRing() const {
+    #####:   63:        return ring;
+    %%%%%:   63-block  0
+        -:   64:    }
+        -:   65:
+function _ZNK6Config12getHeadLimitEv called 0 returned 0% blocks executed 0%
+    #####:   66:    int getHeadLimit() const {
+    #####:   67:        return headLimit;
+    %%%%%:   67-block  0
+        -:   68:    }
+        -:   69:
+function _ZNK6Config12getTailLimitEv called 0 returned 0% blocks executed 0%
+    #####:   70:    int getTailLimit() const {
+    #####:   71:        return tailLimit;
+    %%%%%:   71-block  0
+        -:   72:    }
+        -:   73:
+function _ZNK6Config14getRejectLimitEv called 0 returned 0% blocks executed 0%
+    #####:   74:    int getRejectLimit() const {
+    #####:   75:        return rejectLimit;
+    %%%%%:   75-block  0
+        -:   76:    }
+        -:   77:
+function _ZNK6Config8getStateEv called 0 returned 0% blocks executed 0%
+    #####:   78:    configs getState() const {
+    #####:   79:        return state;
+    %%%%%:   79-block  0
+        -:   80:    }
+        -:   81:
+        -:   82:    friend ostream &operator<<(ostream &os, const Config &config) {
+        -:   83:        os << "ring: " << config.ring << " headLimit: " << config.headLimit << " tailLimit: " << config.tailLimit
+        -:   84:           << " rejectLimit: " << config.rejectLimit << " state: " << config.state << " filePath: " << config.filePath;
+        -:   85:        return os;
+        -:   86:    }
+        -:   87:
+        -:   88:};
+        -:   89:
+        -:   90:
+        -:   91:#endif //LIST_CONFIG_H

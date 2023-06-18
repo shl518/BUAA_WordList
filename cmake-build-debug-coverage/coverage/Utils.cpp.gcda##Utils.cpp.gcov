@@ -1,0 +1,2096 @@
+        -:    0:Source:F:/develop/src/core/Utils.cpp
+        -:    0:Graph:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\Utils.cpp.gcno
+        -:    0:Data:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\Utils.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by cychen on 2023/3/7.
+        -:    3://
+        -:    4:#include <cctype>
+        -:    5:#include <stack>
+        -:    6:#include <queue>
+        -:    7:#include <algorithm>
+        -:    8:#include "Utils.h"
+        -:    9:#include "../preprocess/Config.h"
+        -:   10:
+        -:   11:using namespace std;
+        -:   12:
+function _Z8char2intc called 84 returned 100% blocks executed 67%
+       84:   13:int char2int(char c) {
+       84:   14:    int r = -1;
+       84:   15:    if (islower(c)) {
+       84:   15-block  0
+branch  0 taken 84 (fallthrough)
+branch  1 taken 0
+       84:   16:        r = c - 'a';
+       84:   16-block  0
+    #####:   17:    } else if (isupper(c)) {
+    %%%%%:   17-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   18:        r = c - 'A';
+    %%%%%:   18-block  0
+        -:   19:    }
+       84:   20:    return r;
+       84:   20-block  0
+        -:   21:}
+        -:   22:
+function _Z8int2chari called 0 returned 0% blocks executed 0%
+    #####:   23:char int2char(int n) {
+    #####:   24:    char c = 'a';
+    #####:   25:    if (n < 0 || n > 26) {
+    %%%%%:   25-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:   25-block  1
+branch  2 never executed
+branch  3 never executed
+        -:   26:        //TODO error
+        -:   27:    } else {
+    #####:   28:        c += n;
+    %%%%%:   28-block  0
+        -:   29:    }
+    #####:   30:    return c;
+    %%%%%:   30-block  0
+        -:   31:}
+        -:   32:
+        -:   33:
+function _Z19findFirstOccurrenceRKSt6vectorIiSaIiEEi called 2 returned 100% blocks executed 78%
+        2:   34:int findFirstOccurrence(const std::vector<int> &vec, int target) {
+       2*:   35:    for (int i = 0; i < vec.size(); i++) {
+        2:   35-block  0
+    %%%%%:   35-block  1
+        2:   35-block  2
+call    0 returned 2
+branch  1 taken 2
+branch  2 taken 0 (fallthrough)
+        2:   36:        if (vec[i] == target) {
+        2:   36-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0
+        2:   37:            return i;
+        2:   37-block  0
+        -:   38:        }
+        -:   39:    }
+    #####:   40:    return -1; // 如果没有找到，返回-1
+    %%%%%:   40-block  0
+        -:   41:}
+        -:   42:
+function _Z8dfsCycleRK5GraphRSt6vectorIiSaIiEEiS5_ called 26 returned 100% blocks executed 84%
+       26:   43:bool dfsCycle(const Graph &graph, vector<int> &visited, int node, vector<int> &path) {
+       26:   44:    visited[node] = 1;
+       26:   44-block  0
+call    0 returned 26
+       26:   45:    path.push_back(node);
+call    0 returned 26
+       29:   46:    for (auto &e: graph.getAdj()[node]) {
+call    0 returned 26
+call    1 returned 26
+call    2 returned 26
+        3:   46-block  0
+call    3 returned 3
+        3:   46-block  1
+call    4 returned 3
+       29:   46-block  2
+call    5 returned 29
+branch  6 taken 3
+branch  7 taken 26 (fallthrough)
+        3:   47:        Word w = graph.getEdges()[e];
+call    0 returned 3
+call    1 returned 3
+call    2 returned 3
+branch  3 taken 3 (fallthrough)
+branch  4 taken 0 (throw)
+        3:   48:        int neighbor = w.getAnEnd();
+        3:   48-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        3:   49:        if (visited[neighbor] == 1) {
+        3:   49-block  0
+call    0 returned 3
+branch  1 taken 1 (fallthrough)
+branch  2 taken 2
+        1:   50:            int pos = findFirstOccurrence(path,neighbor);
+        1:   50-block  0
+call    0 returned 1
+        1:   51:            if (path.size() - findFirstOccurrence(path,neighbor) >= 2) {
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 1
+    #####:   52:                return true;
+    %%%%%:   52-block  0
+        -:   53:            } else {
+        1:   54:                path.push_back(neighbor);
+        1:   54-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   55:            }
+        2:   56:        } else if (visited[neighbor] == 0) {
+        2:   56-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0
+        2:   57:            if (dfsCycle(graph, visited, neighbor, path)) {
+        2:   57-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   57-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 2
+    #####:   58:                return true;
+    %%%%%:   58-block  0
+        -:   59:            }
+        -:   60:        }
+        3:   61:    }
+        3:   61-block  0
+        3:   61-block  1
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0
+    $$$$$:   61-block  2
+call    3 never executed
+       26:   62:    path.pop_back();
+       26:   62-block  0
+call    0 returned 26
+       26:   63:    return false;
+        -:   64:}
+        -:   65:
+function _Z8hasCycleRK5Graph called 1 returned 100% blocks executed 64%
+        1:   66:bool hasCycle(const Graph& graph) {
+        1:   67:    vector<int> visited(MAXN_POINT, 0);
+        1:   67-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:   67-block  1
+call    4 returned 1
+    $$$$$:   67-block  2
+    $$$$$:   67-block  3
+        -:   68:
+       27:   69:    for (int i = 0; i < MAXN_POINT; i++) {
+       26:   69-block  0
+       27:   69-block  1
+branch  0 taken 26
+branch  1 taken 1 (fallthrough)
+       26:   70:        if (visited[i] == 0) {
+       26:   70-block  0
+call    0 returned 26
+branch  1 taken 24 (fallthrough)
+branch  2 taken 2
+       24:   71:            vector<int> path;
+       24:   71-block  0
+call    0 returned 24
+       24:   72:            if (dfsCycle(graph, visited, i, path)) {
+call    0 returned 24
+branch  1 taken 24 (fallthrough)
+branch  2 taken 0 (throw)
+       24:   72-block  0
+branch  3 taken 0 (fallthrough)
+branch  4 taken 24
+    #####:   73:                return true;
+    %%%%%:   73-block  0
+        -:   74:            }
+       24:   75:        }
+       24:   75-block  0
+       24:   75-block  1
+call    0 returned 24
+branch  1 taken 24 (fallthrough)
+branch  2 taken 0
+    $$$$$:   75-block  2
+call    3 never executed
+        -:   76:    }
+        1:   77:    return false;
+        1:   77-block  0
+        1:   78:}
+        1:   78-block  0
+call    0 returned 1
+    $$$$$:   78-block  1
+call    1 never executed
+        -:   79:
+        -:   80://从start节点开始dfs
+function _Z8dfsGraph5GraphibRSt6vectorIbSaIbEERS0_INSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS9_EERS0_ISB_SaISB_EE called 5333 returned 100% blocks executed 89%
+     5333:   81:int dfsGraph(Graph graph, int start, bool mustMore2, vector<bool> &visited, vector<string> &path,
+        -:   82:             vector<vector<string>> &pathList) {
+    5333*:   83:    if ((!mustMore2 && path.size() >= 1) || (mustMore2 && path.size() >= 2)) {
+     5333:   83-block  0
+branch  0 taken 5333 (fallthrough)
+branch  1 taken 0
+     5333:   83-block  1
+call    2 returned 5333
+branch  3 taken 572 (fallthrough)
+branch  4 taken 4761
+      572:   83-block  2
+branch  5 taken 0 (fallthrough)
+branch  6 taken 572
+    %%%%%:   83-block  3
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+     4761:   83-block  4
+      572:   83-block  5
+     5333:   83-block  6
+branch 10 taken 4761 (fallthrough)
+branch 11 taken 572
+     4761:   84:        pathList.push_back(path);
+     4761:   84-block  0
+call    0 returned 4761
+        -:   85:    }
+     5333:   86:    int r = 0;
+    18242:   87:    for (auto i = graph.getAdj()[start].begin(); i != graph.getAdj()[start].end(); ++i) {
+     5333:   87-block  0
+call    0 returned 5333
+call    1 returned 5333
+    12909:   87-block  1
+call    2 returned 12909
+    18242:   87-block  2
+call    3 returned 18242
+call    4 returned 18242
+call    5 returned 18242
+branch  6 taken 12909
+branch  7 taken 5333 (fallthrough)
+        -:   88:        //i 是与start点相连的edge（word）的编号
+    12909:   89:        Word &w = const_cast<Word &>(graph.getEdges()[*i]);
+    12909:   89-block  0
+call    0 returned 12909
+call    1 returned 12909
+call    2 returned 12909
+    12909:   90:        int to = w.getAnEnd();
+call    0 returned 12909
+branch  1 taken 12909 (fallthrough)
+branch  2 taken 0 (throw)
+    12909:   91:        if (!visited[*i]) {
+    12909:   91-block  0
+call    0 returned 12909
+call    1 returned 12909
+branch  2 taken 12909 (fallthrough)
+branch  3 taken 0 (throw)
+    12909:   91-block  1
+call    4 returned 12909
+branch  5 taken 4761 (fallthrough)
+branch  6 taken 8148
+     4761:   92:            visited[*i] = true; //标记此边已经遍历
+     4761:   92-block  0
+call    0 returned 4761
+call    1 returned 4761
+branch  2 taken 4761 (fallthrough)
+branch  3 taken 0 (throw)
+     4761:   92-block  1
+call    4 returned 4761
+     4761:   93:            path.push_back(w.getStr());
+call    0 returned 4761
+branch  1 taken 4761 (fallthrough)
+branch  2 taken 0 (throw)
+     4761:   93-block  0
+call    3 returned 4761
+branch  4 taken 4761 (fallthrough)
+branch  5 taken 0 (throw)
+     4761:   94:            r = dfsGraph(graph, to, mustMore2, visited, path, pathList);
+     4761:   94-block  0
+call    0 returned 4761
+branch  1 taken 4761 (fallthrough)
+branch  2 taken 0 (throw)
+     4761:   94-block  1
+call    3 returned 4761
+branch  4 taken 4761 (fallthrough)
+branch  5 taken 0 (throw)
+     4761:   94-block  2
+call    6 returned 4761
+    $$$$$:   94-block  3
+call    7 never executed
+    $$$$$:   94-block  4
+     4761:   95:            path.pop_back();
+call    0 returned 4761
+     4761:   96:            visited[*i] = false;
+call    0 returned 4761
+call    1 returned 4761
+branch  2 taken 4761 (fallthrough)
+branch  3 taken 0 (throw)
+     4761:   96-block  0
+call    4 returned 4761
+        -:   97:        }
+        -:   98:    }
+     5333:   99:    return r;
+     5333:   99-block  0
+     5333:   99-block  1
+        -:  100:}
+        -:  101:
+function _Z8topoSort5GraphRSt6vectorIiSaIiEE called 2 returned 100% blocks executed 86%
+        2:  102:int topoSort(Graph graph, vector<int> &result) {
+        2:  103:    queue<int> q;
+        2:  103-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  104:    int r = 0;
+       54:  105:    for (int i = 0; i < MAXN_POINT; i++) {
+        2:  105-block  0
+       52:  105-block  1
+       54:  105-block  2
+branch  0 taken 52
+branch  1 taken 2 (fallthrough)
+       52:  106:        if (graph.getIndegree()[i] == 0) {
+       52:  106-block  0
+call    0 returned 52
+branch  1 taken 47 (fallthrough)
+branch  2 taken 5
+       47:  107:            q.push(i);
+       47:  107-block  0
+call    0 returned 47
+branch  1 taken 47 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  108:        }
+        -:  109:    }
+       54:  110:    while (!q.empty()) {
+        2:  110-block  0
+       54:  110-block  1
+call    0 returned 54
+branch  1 taken 52
+branch  2 taken 2 (fallthrough)
+       52:  111:        int first = q.front();
+       52:  111-block  0
+call    0 returned 52
+       52:  112:        q.pop();
+call    0 returned 52
+       52:  113:        result.push_back(first);
+call    0 returned 52
+branch  1 taken 52 (fallthrough)
+branch  2 taken 0 (throw)
+       58:  114:        for (auto i = graph.getAdj()[first].begin(); i != graph.getAdj()[first].end(); ++i) {
+       52:  114-block  0
+call    0 returned 52
+call    1 returned 52
+        6:  114-block  1
+call    2 returned 6
+       58:  114-block  2
+call    3 returned 58
+call    4 returned 58
+call    5 returned 58
+branch  6 taken 6
+branch  7 taken 52 (fallthrough)
+        6:  115:            Word &w = const_cast<Word &>(graph.getEdges()[*i]);
+        6:  115-block  0
+call    0 returned 6
+call    1 returned 6
+call    2 returned 6
+        6:  116:            int to = w.getAnEnd();
+call    0 returned 6
+branch  1 taken 6 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  117:
+        6:  118:            if (to == first) {
+        6:  118-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 5
+        1:  119:                continue; //自环跳过
+        1:  119-block  0
+        -:  120:            }
+        5:  121:            graph.subIndgree(to);
+        5:  121-block  0
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        5:  122:            if (graph.getIndegree()[to] == 0) {
+        5:  122-block  0
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0
+        5:  123:                q.push(to);
+        5:  123-block  0
+call    0 returned 5
+branch  1 taken 5 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  124:            }
+        -:  125:        }
+        -:  126:    }
+        2:  127:    return r;
+        2:  127-block  0
+        2:  128:}
+        2:  128-block  0
+call    0 returned 2
+    $$$$$:  128-block  1
+call    1 never executed
+        -:  129:
+        -:  130:
+function _Z11dp_loopless5GraphRSt6vectorIiSaIiEE called 1 returned 100% blocks executed 53%
+        1:  131:int dp_loopless(Graph graph, vector<int> &result) {
+        1:  132:    Config *config = Config::getInstance();
+        1:  132-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  133:
+        1:  134:    vector<int> dp(MAXN_POINT, -1);// dp的1*26数组
+        1:  134-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:  134-block  1
+call    4 returned 1
+    $$$$$:  134-block  2
+    $$$$$:  134-block  3
+        1:  135:    vector<int> pre(MAXN_POINT, -1);//记录pre的1*26数组
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:  135-block  0
+call    4 returned 1
+    $$$$$:  135-block  1
+    $$$$$:  135-block  2
+        -:  136:    // 初始化 dp数组
+        1:  137:    if (config->getHeadLimit() == -1) {
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+        -:  138:        //没有首字母限制，dp初始化为每个点的自环数目或者自环字母总数
+    #####:  139:        if (config->getState() == configs::word_count) {
+    %%%%%:  139-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  140:            for (int i = 0; i < MAXN_POINT; i++) {
+    %%%%%:  140-block  0
+    %%%%%:  140-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  141:                dp[i] = graph.getPointSelfLoopCnt(i);
+    %%%%%:  141-block  0
+call    0 never executed
+call    1 never executed
+        -:  142:            }
+    #####:  143:        } else if (config->getState() == configs::char_count) {
+    %%%%%:  143-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  144:            for (int i = 0; i < MAXN_POINT; i++) {
+    %%%%%:  144-block  0
+    %%%%%:  144-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  145:                dp[i] = graph.getSelfEdgeCharSum(i);
+    %%%%%:  145-block  0
+call    0 never executed
+call    1 never executed
+        -:  146:            }
+        -:  147:        }
+        -:  148:
+        -:  149:    } else {
+        -:  150:        //有首字母限制
+        1:  151:        int head = config->getHeadLimit();
+        1:  151-block  0
+call    0 returned 1
+        1:  152:        if (config->getState() == configs::word_count) {
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+        1:  153:            dp[head] = graph.getPointSelfLoopCnt(head);
+        1:  153-block  0
+call    0 returned 1
+call    1 returned 1
+    #####:  154:        } else if (config->getState() == configs::char_count) {
+    %%%%%:  154-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  155:            dp[head] = graph.getSelfEdgeCharSum(head);
+    %%%%%:  155-block  0
+call    0 never executed
+call    1 never executed
+        -:  156:        }
+        -:  157:
+        -:  158:    }
+        -:  159:
+        1:  160:    vector<int> topResult;
+        1:  160-block  0
+call    0 returned 1
+        -:  161:
+        1:  162:    int r = topoSort(graph, topResult);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  162-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:  162-block  1
+call    6 returned 1
+    $$$$$:  162-block  2
+call    7 never executed
+    $$$$$:  162-block  3
+        1:  163:    if (r != 0) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:  164:        return r;
+    %%%%%:  164-block  0
+        -:  165:    }
+        -:  166:
+        -:  167:    //dp 最多单词数
+       27:  168:    for (int i = 0; i < MAXN_POINT; i++) {
+        1:  168-block  0
+       26:  168-block  1
+       27:  168-block  2
+branch  0 taken 26
+branch  1 taken 1 (fallthrough)
+       26:  169:        int from = topResult[i];//起点
+       26:  169-block  0
+call    0 returned 26
+        -:  170:
+      26*:  171:        if (from == config->getRejectLimit()) {
+call    0 returned 26
+branch  1 taken 0 (fallthrough)
+branch  2 taken 26
+      23*:  172:            continue; //拒绝指定首字母，直接跳过
+    %%%%%:  172-block  0
+       23:  172-block  1
+        -:  173:        }
+        -:  174:
+       26:  175:        if (dp[from] < 0) {
+       26:  175-block  0
+call    0 returned 26
+branch  1 taken 23 (fallthrough)
+branch  2 taken 3
+       23:  176:            continue;
+       23:  176-block  0
+        -:  177:        }
+        -:  178:
+        3:  179:        vector<int> edge_from = graph.getEdgeFrom(from);
+        3:  179-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        6:  180:        for (int &it: edge_from) {
+        3:  180-block  0
+call    0 returned 3
+call    1 returned 3
+        3:  180-block  1
+call    2 returned 3
+        3:  180-block  2
+call    3 returned 3
+        6:  180-block  3
+call    4 returned 6
+branch  5 taken 3
+branch  6 taken 3 (fallthrough)
+        3:  181:            Word &w = const_cast<Word &>(graph.getEdges()[it]);
+call    0 returned 3
+call    1 returned 3
+        3:  182:            if (w.getBegin() == w.getAnEnd()) {
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        3:  182-block  0
+call    3 returned 3
+branch  4 taken 3 (fallthrough)
+branch  5 taken 0 (throw)
+        3:  182-block  1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 2
+        1:  183:                continue; //自环跳过
+        1:  183-block  0
+        -:  184:            }
+        2:  185:            int to = w.getAnEnd();//终点
+        2:  185-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  186:            int tmp = 0;
+        2:  187:            if (config->getState() == configs::word_count) { //最多单词数
+        2:  187-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0
+        2:  188:                tmp = dp[from] + 1 + graph.getPointSelfLoopCnt(to);
+        2:  188-block  0
+call    0 returned 2
+call    1 returned 2
+    #####:  189:            } else if (config->getState() == configs::char_count) { //最多字母数
+    %%%%%:  189-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  190:                tmp = dp[from] + w.getLength() + graph.getSelfEdgeCharSum(to);
+    %%%%%:  190-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  190-block  1
+call    4 never executed
+        -:  191:            }
+        2:  192:            if (tmp > dp[to]) {
+        2:  192-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0
+        2:  193:                dp[to] = tmp;
+        2:  193-block  0
+call    0 returned 2
+        2:  194:                pre[to] = from;
+call    0 returned 2
+        -:  195:            }
+        -:  196:        }
+        3:  197:    }
+        3:  197-block  0
+call    0 returned 3
+    $$$$$:  197-block  1
+call    1 never executed
+        -:  198:
+        -:  199:    //找到最佳dp
+        1:  200:    if (config->getTailLimit() != -1) { //指定尾字母
+        1:  200-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+        -:  201:
+    #####:  202:        int n = config->getTailLimit();
+    %%%%%:  202-block  0
+call    0 never executed
+    #####:  203:        if (pre[n] == -1) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  204:            if (config->getHeadLimit() != -1 && config->getHeadLimit() != config->getTailLimit()) {
+    %%%%%:  204-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  204-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  204-block  2
+    %%%%%:  204-block  3
+    %%%%%:  204-block  4
+branch  7 never executed
+branch  8 never executed
+    #####:  205:                return 0;
+    %%%%%:  205-block  0
+        -:  206:            }
+        -:  207:        }
+    #####:  208:        result.push_back(n);
+    %%%%%:  208-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  209:        while (pre[n] != -1) {
+    %%%%%:  209-block  0
+    %%%%%:  209-block  1
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  210:            result.push_back(pre[n]);
+    %%%%%:  210-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  211:            n = pre[n];
+    %%%%%:  211-block  0
+call    0 never executed
+        -:  212:        }
+        -:  213:    } else {
+        1:  214:        int max = -1;
+        1:  215:        int n = -1;
+       27:  216:        for (int i = 0; i < MAXN_POINT; i++) {
+        1:  216-block  0
+       26:  216-block  1
+       27:  216-block  2
+branch  0 taken 26
+branch  1 taken 1 (fallthrough)
+       26:  217:            if (dp[i] > max) {
+       26:  217-block  0
+call    0 returned 26
+branch  1 taken 3 (fallthrough)
+branch  2 taken 23
+        3:  218:                max = dp[i];
+        3:  218-block  0
+call    0 returned 3
+        3:  219:                n = i;
+        -:  220:            }
+        -:  221:        }
+        1:  222:        result.push_back(n);
+        1:  222-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        3:  223:        while (pre[n] != -1) {
+        1:  223-block  0
+        3:  223-block  1
+call    0 returned 3
+branch  1 taken 2
+branch  2 taken 1 (fallthrough)
+        2:  224:            result.push_back(pre[n]);
+        2:  224-block  0
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0 (throw)
+        2:  225:            n = pre[n];
+        2:  225-block  0
+call    0 returned 2
+        -:  226:        }
+        -:  227:    }
+        1:  228:    return 0;
+        1:  228-block  0
+        1:  229:}
+        1:  229-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+    $$$$$:  229-block  1
+call    3 never executed
+    $$$$$:  229-block  2
+call    4 never executed
+    $$$$$:  229-block  3
+call    5 never executed
+        -:  230:
+        -:  231:
+function _Z6tarjani5GraphRSt6vectorIiSaIiEES3_S3_RSt5stackIiSt5dequeIiS1_EERS0_IS2_SaIS2_EE called 26 returned 100% blocks executed 89%
+       26:  232:int tarjan(int u, Graph graph, vector<int> &dfn, vector<int> &low, vector<int> &inStack, stack<int> &stk,
+        -:  233:           vector<vector<int>> &scc) {
+        -:  234:    static int timeStamp = 0;
+       26:  235:    dfn[u] = low[u] = ++timeStamp;
+       26:  235-block  0
+call    0 returned 26
+call    1 returned 26
+       26:  236:    stk.push(u);
+call    0 returned 26
+       26:  237:    inStack[u] = true;
+call    0 returned 26
+        -:  238:
+       46:  239:    for (auto it = graph.getAdj()[u].begin(); it != graph.getAdj()[u].end(); it++) {
+call    0 returned 26
+call    1 returned 26
+       20:  239-block  0
+call    2 returned 20
+       46:  239-block  1
+call    3 returned 46
+call    4 returned 46
+call    5 returned 46
+branch  6 taken 20
+branch  7 taken 26 (fallthrough)
+       20:  240:        Word &w = const_cast<Word &>(graph.getEdges()[*it]);
+       20:  240-block  0
+call    0 returned 20
+call    1 returned 20
+call    2 returned 20
+       20:  241:        int v = w.getAnEnd();
+call    0 returned 20
+branch  1 taken 20 (fallthrough)
+branch  2 taken 0 (throw)
+       20:  242:        if (dfn[v] == 0) {
+       20:  242-block  0
+call    0 returned 20
+branch  1 taken 7 (fallthrough)
+branch  2 taken 13
+        7:  243:            tarjan(v, graph, dfn, low, inStack, stk, scc);
+        7:  243-block  0
+call    0 returned 7
+branch  1 taken 7 (fallthrough)
+branch  2 taken 0 (throw)
+        7:  243-block  1
+call    3 returned 7
+branch  4 taken 7 (fallthrough)
+branch  5 taken 0 (throw)
+        7:  243-block  2
+call    6 returned 7
+    $$$$$:  243-block  3
+call    7 never executed
+    $$$$$:  243-block  4
+        7:  244:            low[u] = min(low[u], low[v]);
+call    0 returned 7
+call    1 returned 7
+call    2 returned 7
+call    3 returned 7
+       13:  245:        } else if (inStack[v]) {
+       13:  245-block  0
+call    0 returned 13
+branch  1 taken 12 (fallthrough)
+branch  2 taken 1
+       12:  246:            low[u] = min(low[u], dfn[v]);
+       12:  246-block  0
+call    0 returned 12
+call    1 returned 12
+call    2 returned 12
+call    3 returned 12
+        -:  247:        }
+        -:  248:    }
+        -:  249:
+       26:  250:    if (dfn[u] == low[u]) {
+       26:  250-block  0
+call    0 returned 26
+call    1 returned 26
+branch  2 taken 22 (fallthrough)
+branch  3 taken 4
+       22:  251:        vector<int> component;
+       22:  251-block  0
+call    0 returned 22
+        -:  252:        int v;
+        -:  253:        do {
+       26:  254:            v = stk.top();
+       26:  254-block  0
+call    0 returned 26
+       26:  255:            stk.pop();
+call    0 returned 26
+       26:  256:            inStack[v] = false;
+call    0 returned 26
+       26:  257:            component.push_back(v);
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0 (throw)
+       26:  258:        } while (v != u);
+       26:  258-block  0
+branch  0 taken 4
+branch  1 taken 22 (fallthrough)
+       22:  259:        scc.push_back(component);
+       22:  259-block  0
+call    0 returned 22
+branch  1 taken 22 (fallthrough)
+branch  2 taken 0 (throw)
+       22:  260:    }
+       22:  260-block  0
+call    0 returned 22
+    $$$$$:  260-block  1
+call    1 never executed
+        -:  261:
+       26:  262:    return 0;
+       26:  262-block  0
+       26:  262-block  1
+        -:  263:}
+        -:  264:
+        -:  265:
+function _Z6getScc5GraphRSt6vectorIS0_IiSaIiEESaIS2_EE called 1 returned 100% blocks executed 56%
+        1:  266:int getScc(Graph graph, vector<vector<int>> &result) {
+        3:  267:    vector<int> dfn(MAXN_POINT), low(MAXN_POINT), instack(MAXN_POINT);
+        1:  267-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+call    4 returned 1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+call    8 returned 1
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+    $$$$$:  267-block  1
+    $$$$$:  267-block  2
+    $$$$$:  267-block  3
+        1:  268:    stack<int> stk;
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  269:    int r = 0;
+       27:  270:    for (int i = 0; i < MAXN_POINT; i++) {
+        1:  270-block  0
+       26:  270-block  1
+       27:  270-block  2
+branch  0 taken 26
+branch  1 taken 1 (fallthrough)
+       26:  271:        if (dfn[i] == 0) {
+       26:  271-block  0
+call    0 returned 26
+branch  1 taken 19 (fallthrough)
+branch  2 taken 7
+       19:  272:            r = tarjan(i, graph, dfn, low, instack, stk, result);
+       19:  272-block  0
+call    0 returned 19
+branch  1 taken 19 (fallthrough)
+branch  2 taken 0 (throw)
+       19:  272-block  1
+call    3 returned 19
+branch  4 taken 19 (fallthrough)
+branch  5 taken 0 (throw)
+       19:  272-block  2
+call    6 returned 19
+    $$$$$:  272-block  3
+call    7 never executed
+    $$$$$:  272-block  4
+       19:  273:            if (r != 0) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 19
+    #####:  274:                return r;
+    %%%%%:  274-block  0
+        -:  275:            }
+        -:  276:        }
+        -:  277:    }
+        1:  278:    return 0;
+        1:  278-block  0
+        1:  279:}
+        1:  279-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+    $$$$$:  279-block  1
+call    4 never executed
+    $$$$$:  279-block  2
+call    5 never executed
+    $$$$$:  279-block  3
+call    6 never executed
+    $$$$$:  279-block  4
+call    7 never executed
+        -:  280:
+function _Z12totalLettersRKSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE called 0 returned 0% blocks executed 0%
+    #####:  281:int totalLetters(const vector<string> &vec) {
+    #####:  282:    int count = 0;
+    #####:  283:    for (const auto &str: vec) {
+    %%%%%:  283-block  0
+call    0 never executed
+call    1 never executed
+    %%%%%:  283-block  1
+call    2 never executed
+    %%%%%:  283-block  2
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  284:        count += static_cast<int>(str.size());
+call    0 never executed
+call    1 never executed
+        -:  285:    }
+    #####:  286:    return count;
+    %%%%%:  286-block  0
+        -:  287:}
+        -:  288:
+        -:  289://得到图中任意两点的最长路径/最长字母数路径,传入26*26初始值为0的二维数组 TODO 这里可以直接记录路径，之后回溯时再做
+        -:  290://指定拒绝首字母，直接跳过这条路径
+function _Z10getMaxDistRK5GraphRSt6vectorIS2_IiSaIiEESaIS4_EERS2_IS2_IS2_INSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaISD_EESaISF_EESaISH_EEi called 22 returned 100% blocks executed 61%
+       22:  291:int getMaxDist(const Graph &graph, vector<vector<int>> &result, vector<vector<vector<string>>> &maxPathRecord, int i) {
+       22:  292:    Config *config = Config::getInstance();
+       22:  292-block  0
+call    0 returned 22
+      594:  293:    for (int i = 0; i < 26; ++i) {
+      572:  293-block  0
+      594:  293-block  1
+branch  0 taken 572
+branch  1 taken 22 (fallthrough)
+     572*:  294:        if (i == config->getRejectLimit()) {
+      572:  294-block  0
+call    0 returned 572
+branch  1 taken 0 (fallthrough)
+branch  2 taken 572
+    #####:  295:            continue; //指定拒绝首字母直接跳过
+    %%%%%:  295-block  0
+        -:  296:        }
+      572:  297:        vector<bool> visited(graph.getEdgeCnt(), false);
+      572:  297-block  0
+call    0 returned 572
+call    1 returned 572
+call    2 returned 572
+branch  3 taken 572 (fallthrough)
+branch  4 taken 0 (throw)
+      572:  297-block  1
+call    5 returned 572
+    $$$$$:  297-block  2
+    $$$$$:  297-block  3
+      572:  298:        vector<string> path;
+call    0 returned 572
+      572:  299:        vector<vector<string>> pathList;
+call    0 returned 572
+      572:  300:        dfsGraph(graph, i, false, visited, path, pathList);
+call    0 returned 572
+branch  1 taken 572 (fallthrough)
+branch  2 taken 0 (throw)
+      572:  300-block  0
+call    3 returned 572
+branch  4 taken 572 (fallthrough)
+branch  5 taken 0 (throw)
+      572:  300-block  1
+call    6 returned 572
+    $$$$$:  300-block  2
+call    7 never executed
+    $$$$$:  300-block  3
+     5333:  301:        for (const auto &vec: pathList) {
+call    0 returned 572
+call    1 returned 572
+     4761:  301-block  0
+call    2 returned 4761
+     4761:  301-block  1
+call    3 returned 4761
+     5333:  301-block  2
+call    4 returned 5333
+branch  5 taken 4761
+branch  6 taken 572 (fallthrough)
+     4761:  302:            int to = vec.back().back() - 'a';
+call    0 returned 4761
+call    1 returned 4761
+     4761:  303:            if (config->getState() == configs::word_count) { //记录最长单词数路径
+call    0 returned 4761
+branch  1 taken 4761 (fallthrough)
+branch  2 taken 0
+     4761:  304:                if (result[i][to] < vec.size()) {
+     4761:  304-block  0
+call    0 returned 4761
+call    1 returned 4761
+call    2 returned 4761
+branch  3 taken 48 (fallthrough)
+branch  4 taken 4713
+       48:  305:                    result[i][to] = static_cast<int>(vec.size());//强制类型转换
+       48:  305-block  0
+call    0 returned 48
+call    1 returned 48
+call    2 returned 48
+       48:  306:                    maxPathRecord[i][to] = vec;
+call    0 returned 48
+call    1 returned 48
+call    2 returned 48
+branch  3 taken 48 (fallthrough)
+branch  4 taken 0 (throw)
+        -:  307:                }
+    #####:  308:            } else if (config->getState() == configs::char_count) { //记录最长字母数路径
+    %%%%%:  308-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  309:                int totolLetter = totalLetters(vec);
+    %%%%%:  309-block  0
+call    0 never executed
+    #####:  310:                if (result[i][to] < totolLetter) {
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  311:                    result[i][to] = totolLetter;
+    %%%%%:  311-block  0
+call    0 never executed
+call    1 never executed
+    #####:  312:                    maxPathRecord[i][to] = vec;
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+        -:  313:                }
+        -:  314:            }
+        -:  315:        }
+      572:  316:    }
+      572:  316-block  0
+call    0 returned 572
+call    1 returned 572
+call    2 returned 572
+    $$$$$:  316-block  1
+call    3 never executed
+    $$$$$:  316-block  2
+call    4 never executed
+    $$$$$:  316-block  3
+call    5 never executed
+       22:  317:    return 0;
+       22:  317-block  0
+       22:  317-block  1
+        -:  318:}
+        -:  319:
+        -:  320:
+        -:  321://深克隆得到只包含points的生成子图
+function _Z11getSubGraphRK5GraphSt6vectorIiSaIiEERS_i called 22 returned 100% blocks executed 78%
+       22:  322:int getSubGraph(const Graph &graph, vector<int> points, Graph &newGraph, int i) {
+       22:  323:    vector<string> words;
+       22:  323-block  0
+call    0 returned 22
+      462:  324:    for (const auto &it: graph.getEdges()) {
+call    0 returned 22
+call    1 returned 22
+call    2 returned 22
+      440:  324-block  0
+call    3 returned 440
+      440:  324-block  1
+call    4 returned 440
+      462:  324-block  2
+call    5 returned 462
+branch  6 taken 440
+branch  7 taken 22 (fallthrough)
+      440:  325:        int from = it.getBegin(), to = it.getAnEnd();
+call    0 returned 440
+branch  1 taken 440 (fallthrough)
+branch  2 taken 0 (throw)
+      440:  325-block  0
+call    3 returned 440
+branch  4 taken 440 (fallthrough)
+branch  5 taken 0 (throw)
+      440:  326:        if (find(points.begin(), points.end(), from) != points.end()
+      440:  326-block  0
+call    0 returned 440
+call    1 returned 440
+call    2 returned 440
+call    3 returned 440
+branch  4 taken 440 (fallthrough)
+branch  5 taken 0 (throw)
+      440:  326-block  1
+call    6 returned 440
+    $$$$$:  326-block  2
+    $$$$$:  326-block  3
+      440:  327:            && find(points.begin(), points.end(), to) != points.end()) { //起点终点都在这个强连通分量里
+branch  0 taken 20 (fallthrough)
+branch  1 taken 420
+       20:  327-block  0
+call    2 returned 20
+call    3 returned 20
+call    4 returned 20
+call    5 returned 20
+branch  6 taken 20 (fallthrough)
+branch  7 taken 0 (throw)
+       20:  327-block  1
+call    8 returned 20
+branch  9 taken 16 (fallthrough)
+branch 10 taken 4
+       16:  327-block  2
+      424:  327-block  3
+      440:  327-block  4
+branch 11 taken 16 (fallthrough)
+branch 12 taken 424
+    $$$$$:  327-block  5
+    $$$$$:  327-block  6
+       16:  328:            const string &str = it.getStr();
+       16:  328-block  0
+call    0 returned 16
+branch  1 taken 16 (fallthrough)
+branch  2 taken 0 (throw)
+       16:  329:            words.push_back(str);
+       16:  329-block  0
+call    0 returned 16
+branch  1 taken 16 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  330:        }
+        -:  331:    }
+       22:  332:    vector<Word> edges;
+       22:  332-block  0
+call    0 returned 22
+       22:  333:    int r = 0;
+       22:  334:    r = genWordFromList(words, edges);
+call    0 returned 22
+branch  1 taken 22 (fallthrough)
+branch  2 taken 0 (throw)
+       22:  335:    if (r != 0) {
+       22:  335-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 22
+    #####:  336:        return r;
+    %%%%%:  336-block  0
+        -:  337:    }
+       22:  338:    newGraph = Graph(edges);
+       22:  338-block  0
+call    0 returned 22
+branch  1 taken 22 (fallthrough)
+branch  2 taken 0 (throw)
+       22:  338-block  1
+call    3 returned 22
+call    4 returned 22
+        -:  339://    for(auto &e:newGraph.getEdges()){
+        -:  340://        cout << e.getId()<<endl;
+        -:  341://    }
+       22:  342:    return 0;
+       22:  343:}
+       22:  343-block  0
+call    0 returned 22
+call    1 returned 22
+    $$$$$:  343-block  1
+call    2 never executed
+    $$$$$:  343-block  2
+call    3 never executed
+        -:  344:
+function _Z8getSccIdRKSt6vectorIS_IiSaIiEESaIS1_EEiRi called 23 returned 100% blocks executed 77%
+       23:  345:int getSccId(const vector<vector<int>> &sccInput, int point, int &result) {
+       23:  346:    int sccNum = static_cast<int>(sccInput.size());
+       23:  346-block  0
+call    0 returned 23
+       48:  347:    for (int i = 0; i < sccNum; i++) {
+       25:  347-block  0
+       48:  347-block  1
+branch  0 taken 48
+branch  1 taken 0 (fallthrough)
+       48:  348:        vector<int> vec = sccInput[i];
+       48:  348-block  0
+call    0 returned 48
+call    1 returned 48
+branch  2 taken 48 (fallthrough)
+branch  3 taken 0 (throw)
+       48:  349:        if (find(vec.begin(), vec.end(), point) != vec.end()) {
+       48:  349-block  0
+call    0 returned 48
+call    1 returned 48
+call    2 returned 48
+call    3 returned 48
+branch  4 taken 48 (fallthrough)
+branch  5 taken 0 (throw)
+       48:  349-block  1
+call    6 returned 48
+branch  7 taken 23 (fallthrough)
+branch  8 taken 25
+    $$$$$:  349-block  2
+       23:  350:            result = i;
+       23:  351:            return 0;
+       23:  351-block  0
+        -:  352:        }
+       48:  353:    }
+       25:  353-block  0
+       48:  353-block  1
+call    0 returned 48
+branch  1 taken 25 (fallthrough)
+branch  2 taken 23
+    $$$$$:  353-block  2
+call    3 never executed
+        -:  354:    //TODO 这个最后删掉
+    #####:  355:    cout << "error at getSccid" << endl;
+    %%%%%:  355-block  0
+call    0 never executed
+call    1 never executed
+    #####:  356:    return -1;
+        -:  357:}
+        -:  358:
+        -:  359://每一个强连通分量缩成一个点，返回新的图,这个图的边没有任何意义，只是为了拓扑排序
+function _Z11getNewGraphRK5GraphRKSt6vectorIS2_IiSaIiEESaIS4_EERS_RS2_IS2_IS2_IP4WordSaISB_EESaISD_EESaISF_EE called 1 returned 100% blocks executed 73%
+        1:  360:int getNewGraph(const Graph &graph, const vector<vector<int>> &sccInput, Graph &newGraph,
+        -:  361:                vector<vector<vector<Word *>>> &edgesBetweenScc) {
+        1:  362:    int r = 0;
+        1:  363:    int sccNum = static_cast<int>(sccInput.size());
+        1:  363-block  0
+call    0 returned 1
+        1:  364:    vector<string> words;
+call    0 returned 1
+        1:  365:    vector<Word> edges;
+call    0 returned 1
+        -:  366:    //从每一个块A出发，遍历这个块里的所有点，遍历点的所有边，找到边对应的终点块号B，A ！= B，加一条A到B的边
+       23:  367:    for (int fromScc = 0; fromScc < sccNum; fromScc++) {
+       22:  367-block  0
+       23:  367-block  1
+branch  0 taken 22
+branch  1 taken 1 (fallthrough)
+       48:  368:        for (auto &point: sccInput[fromScc]) {
+       22:  368-block  0
+call    0 returned 22
+call    1 returned 22
+call    2 returned 22
+       26:  368-block  1
+call    3 returned 26
+       26:  368-block  2
+call    4 returned 26
+       48:  368-block  3
+call    5 returned 48
+branch  6 taken 26
+branch  7 taken 22 (fallthrough)
+       46:  369:            for (auto it = graph.getAdj()[point].begin(); it != graph.getAdj()[point].end(); it++) {
+call    0 returned 26
+call    1 returned 26
+       20:  369-block  0
+call    2 returned 20
+       46:  369-block  1
+call    3 returned 46
+call    4 returned 46
+call    5 returned 46
+branch  6 taken 20
+branch  7 taken 26 (fallthrough)
+       20:  370:                Word &w = const_cast<Word &>(graph.getEdges()[*it]);
+       20:  370-block  0
+call    0 returned 20
+call    1 returned 20
+call    2 returned 20
+       20:  371:                int to = w.getAnEnd();
+call    0 returned 20
+branch  1 taken 20 (fallthrough)
+branch  2 taken 0 (throw)
+       20:  372:                int toScc = -1;// 终点块号
+       20:  373:                r = getSccId(sccInput, to, toScc);
+       20:  373-block  0
+call    0 returned 20
+branch  1 taken 20 (fallthrough)
+branch  2 taken 0 (throw)
+       20:  374:                if (r != 0) {
+       20:  374-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 20
+    #####:  375:                    return r;
+    %%%%%:  375-block  0
+        -:  376:                }
+       20:  377:                if (toScc != fromScc) {
+       20:  377-block  0
+branch  0 taken 4 (fallthrough)
+branch  1 taken 16
+        4:  378:                    char a = static_cast<char>('a' + fromScc);
+        4:  379:                    char b = static_cast<char>('a' + toScc);
+        8:  380:                    string str = string(1, a) + b;;
+        4:  380-block  0
+call    0 returned 4
+call    1 returned 4
+branch  2 taken 4 (fallthrough)
+branch  3 taken 0 (throw)
+        4:  380-block  1
+call    4 returned 4
+branch  5 taken 4 (fallthrough)
+branch  6 taken 0 (throw)
+call    7 returned 4
+    $$$$$:  380-block  2
+    $$$$$:  380-block  3
+        4:  381:                    words.push_back(str);
+call    0 returned 4
+branch  1 taken 4 (fallthrough)
+branch  2 taken 0 (throw)
+        4:  382:                    edgesBetweenScc[fromScc][toScc].push_back(&w);
+        4:  382-block  0
+call    0 returned 4
+call    1 returned 4
+call    2 returned 4
+branch  3 taken 4 (fallthrough)
+branch  4 taken 0 (throw)
+    $$$$$:  382-block  1
+        4:  383:                    w.setToSccId(toScc);
+        4:  383-block  0
+call    0 returned 4
+branch  1 taken 4 (fallthrough)
+branch  2 taken 0 (throw)
+        4:  384:                }
+        4:  384-block  0
+call    0 returned 4
+    $$$$$:  384-block  1
+call    1 never executed
+        -:  385:            }
+        -:  386:        }
+        -:  387:    }
+        1:  388:    genWordFromList(words, edges);
+        1:  388-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  389:    newGraph = Graph(edges, true);//这里唯一一处ban掉Reject
+        1:  389-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  389-block  1
+call    3 returned 1
+call    4 returned 1
+        1:  390:    return 0;
+        1:  391:}
+        1:  391-block  0
+call    0 returned 1
+call    1 returned 1
+    $$$$$:  391-block  1
+call    2 never executed
+    $$$$$:  391-block  2
+call    3 never executed
+        -:  392:
+function _Z14getSccTopoSortRK5GraphiRSt6vectorIiSaIiEE called 1 returned 100% blocks executed 79%
+        1:  393:int getSccTopoSort(const Graph &sccGraph, const int sccNum, vector<int> &results) {
+        1:  394:    vector<int> preResults;
+        1:  394-block  0
+call    0 returned 1
+        1:  395:    int r = 0;
+        1:  396:    r = topoSort(sccGraph, preResults);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  396-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:  396-block  1
+call    6 returned 1
+    $$$$$:  396-block  2
+call    7 never executed
+    $$$$$:  396-block  3
+        1:  397:    if (r != 0) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:  398:        return r;
+    %%%%%:  398-block  0
+        -:  399:    }
+       27:  400:    for (int i = 0; i < MAXN_POINT; i++) {
+        1:  400-block  0
+       26:  400-block  1
+       27:  400-block  2
+branch  0 taken 26
+branch  1 taken 1 (fallthrough)
+       26:  401:        if (preResults[i] >= 0 && preResults[i] < sccNum) {
+       26:  401-block  0
+call    0 returned 26
+branch  1 taken 26 (fallthrough)
+branch  2 taken 0
+       26:  401-block  1
+call    3 returned 26
+branch  4 taken 22 (fallthrough)
+branch  5 taken 4
+       22:  401-block  2
+        4:  401-block  3
+       26:  401-block  4
+branch  6 taken 22 (fallthrough)
+branch  7 taken 4
+       22:  402:            results.push_back(preResults[i]);
+       22:  402-block  0
+call    0 returned 22
+call    1 returned 22
+branch  2 taken 22 (fallthrough)
+branch  3 taken 0 (throw)
+        -:  403:        }
+        -:  404:    }
+        1:  405:    return 0;
+        1:  405-block  0
+        1:  406:}
+        1:  406-block  0
+call    0 returned 1
+    $$$$$:  406-block  1
+call    1 never executed
+        -:  407:
+        -:  408:
+function _Z7dp_loopRK5GraphRSt6vectorIS2_INSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS8_EESaISA_EE called 1 returned 100% blocks executed 57%
+        1:  409:int dp_loop(const Graph &graph, vector<vector<string>> &result) {
+        1:  410:    Config *config = Config::getInstance();
+        1:  410-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  411:    //得到强连通分量分配结果
+        1:  412:    vector<vector<int>> sccResult;
+        1:  412-block  0
+call    0 returned 1
+        1:  413:    int r = getScc(graph, sccResult);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  413-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:  413-block  1
+call    6 returned 1
+    $$$$$:  413-block  2
+call    7 never executed
+    $$$$$:  413-block  3
+        1:  414:    if (r != 0) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:  415:        return r;
+    %%%%%:  415-block  0
+        -:  416:    }
+        1:  417:    int sccNum = static_cast<int>(sccResult.size());//得到强连通分量个数
+        1:  417-block  0
+call    0 returned 1
+        -:  418:    //预处理每个强连通分量内部任意各点的最大距离 sccNum * 26 * 26 ,初始值为0
+        2:  419:    vector<vector<vector<int>>> sccMaxDist(sccNum, vector<vector<int>>(26, vector<int>(26, 0)));
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:  419-block  0
+call    6 returned 1
+branch  7 taken 1 (fallthrough)
+branch  8 taken 0 (throw)
+        1:  419-block  1
+call    9 returned 1
+branch 10 taken 1 (fallthrough)
+branch 11 taken 0 (throw)
+call   12 returned 1
+call   13 returned 1
+call   14 returned 1
+call   15 returned 1
+    $$$$$:  419-block  2
+    $$$$$:  419-block  3
+    $$$$$:  419-block  4
+    $$$$$:  419-block  5
+    $$$$$:  419-block  6
+    $$$$$:  419-block  7
+        4:  420:    vector<vector<vector<vector<string>>>> sccMaxPathRecord(sccNum, vector<vector<vector<string>>>(26,
+call    0 returned 1
+        1:  420-block  0
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+call    4 returned 1
+call    5 returned 1
+    $$$$$:  420-block  1
+    $$$$$:  420-block  2
+        2:  421:                                                                                                   vector<vector<string>>(
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+call    4 returned 1
+call    5 returned 1
+    $$$$$:  421-block  0
+    $$$$$:  421-block  1
+        2:  422:                                                                                                           26)));//TODO 好丑 主要是记录每个SCC内任意两点的最长路径，避免以后还得找，但是应该有更好的数据结构
+call    0 returned 1
+        1:  422-block  0
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:  422-block  1
+       23:  423:    for (int i = 0; i < sccNum; i++) {
+       23:  423-block  0
+branch  0 taken 22
+branch  1 taken 1 (fallthrough)
+        -:  424:        //第i个强连通分量的子图
+       22:  425:        Graph sccGraph;
+       22:  425-block  0
+call    0 returned 22
+branch  1 taken 22 (fallthrough)
+branch  2 taken 0 (throw)
+       22:  426:        getSubGraph(graph, sccResult[i], sccGraph, i);
+       22:  426-block  0
+call    0 returned 22
+call    1 returned 22
+branch  2 taken 22 (fallthrough)
+branch  3 taken 0 (throw)
+       22:  426-block  1
+call    4 returned 22
+branch  5 taken 22 (fallthrough)
+branch  6 taken 0 (throw)
+       22:  426-block  2
+call    7 returned 22
+    $$$$$:  426-block  3
+call    8 never executed
+    $$$$$:  426-block  4
+       22:  427:        getMaxDist(sccGraph, sccMaxDist[i], sccMaxPathRecord[i], i);
+call    0 returned 22
+call    1 returned 22
+call    2 returned 22
+branch  3 taken 22 (fallthrough)
+branch  4 taken 0 (throw)
+       22:  428:    }
+       22:  428-block  0
+call    0 returned 22
+    $$$$$:  428-block  1
+call    1 never executed
+        -:  429:    //缩点
+        1:  430:    Graph newGraph;
+        1:  430-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        2:  431:    vector<vector<vector<Word *>>> edgesBetweenScc(sccNum, vector<vector<Word *>>(sccNum));//强连通分量之间连接的word
+        1:  431-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+branch  3 taken 1 (fallthrough)
+branch  4 taken 0 (throw)
+        1:  431-block  1
+call    5 returned 1
+branch  6 taken 1 (fallthrough)
+branch  7 taken 0 (throw)
+call    8 returned 1
+call    9 returned 1
+    $$$$$:  431-block  2
+    $$$$$:  431-block  3
+    $$$$$:  431-block  4
+        1:  432:    getNewGraph(graph, sccResult, newGraph, edgesBetweenScc);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  433:    // 对缩点后的图，得到强连通分量的topo排序结果
+        1:  434:    vector<int> sccTopoResults;
+        1:  434-block  0
+call    0 returned 1
+        1:  435:    getSccTopoSort(newGraph, sccNum, sccTopoResults);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  436:    //以上为预处理
+        -:  437:
+        -:  438:    //-----------------------------------------------------------------------------
+        -:  439:    //开始dp
+        -:  440:    //1.dp初始化
+        -:  441:
+        1:  442:    vector<int> dp(MAXN_POINT, -1);
+        1:  442-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:  442-block  1
+call    4 returned 1
+    $$$$$:  442-block  2
+    $$$$$:  442-block  3
+        1:  443:    vector<int> pre(MAXN_POINT, -1);//这里有所不同，我们存储了块之间的边的编号
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:  443-block  0
+call    4 returned 1
+    $$$$$:  443-block  1
+    $$$$$:  443-block  2
+        -:  444:    //dp[26]初始化为这个点所在SCC内，以这个点为结尾的最长单词数路径长度/字母数路径长度
+        1:  445:    if (config->getHeadLimit() == -1) {
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0
+       23:  446:        for (int i = 0; i < sccNum; i++) { //第i个scc
+        1:  446-block  0
+       22:  446-block  1
+       23:  446-block  2
+branch  0 taken 22
+branch  1 taken 1
+       48:  447:            for (auto &point: sccResult[i]) { //第i个scc里面的点point
+       22:  447-block  0
+call    0 returned 22
+call    1 returned 22
+call    2 returned 22
+       26:  447-block  1
+call    3 returned 26
+       48:  447-block  2
+call    4 returned 48
+branch  5 taken 26
+branch  6 taken 22 (fallthrough)
+       26:  448:                int max = 0;
+      702:  449:                for (int j = 0; j < MAXN_POINT; j++) { //找到第i个scc，sccMaxDist第point列的最大值
+      676:  449-block  0
+      702:  449-block  1
+branch  0 taken 676
+branch  1 taken 26 (fallthrough)
+      676:  450:                    if (sccMaxDist[i][j][point] > max) {
+      676:  450-block  0
+call    0 returned 676
+call    1 returned 676
+call    2 returned 676
+branch  3 taken 10 (fallthrough)
+branch  4 taken 666
+       10:  451:                        max = sccMaxDist[i][j][point];
+       10:  451-block  0
+call    0 returned 10
+call    1 returned 10
+call    2 returned 10
+        -:  452:                    }
+        -:  453:                }
+       26:  454:                dp[point] = max;
+       26:  454-block  0
+call    0 returned 26
+call    1 returned 26
+        -:  455:            }
+        -:  456:        }
+        -:  457:    } else { //有首字母限制
+    #####:  458:        int head = config->getHeadLimit();
+    %%%%%:  458-block  0
+call    0 never executed
+        -:  459:        //这个块内的点都要设置为从head到该点的长度
+        -:  460:        int sccId;
+    #####:  461:        getSccId(sccResult,head,sccId);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  462:        for(auto &point:sccResult[sccId]){
+    %%%%%:  462-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    %%%%%:  462-block  1
+call    3 never executed
+    %%%%%:  462-block  2
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:  463:            dp[point] = sccMaxDist[sccId][head][point];
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+        -:  464:        }
+        -:  465://        for (int i = 0; i < sccNum; i++) { //第i个scc
+        -:  466://            int flag = 0;
+        -:  467://            for (auto &point: sccResult[i]) { //第i个scc里面的点point
+        -:  468://                if (point == head) {
+        -:  469://                    int max = 0;
+        -:  470://                    for (int j = 0; j < MAXN_POINT; j++) { //找到第i个scc，sccMaxDist第point列的最大值
+        -:  471://                        if (sccMaxDist[i][j][point] > max) {
+        -:  472://                            max = sccMaxDist[i][j][point];
+        -:  473://                        }
+        -:  474://                    }
+        -:  475://                    dp[point] = max;
+        -:  476://                    flag = 1;
+        -:  477://                    break;
+        -:  478://                }
+        -:  479://            }
+        -:  480://            if (flag == 1) {
+        -:  481://                break;
+        -:  482://            }
+        -:  483://        }
+        -:  484:    }
+        -:  485:
+        -:  486:    //2. 开始推导dp数组
+       23:  487:    for (int i = 0; i < sccNum; i++) {
+        1:  487-block  0
+       22:  487-block  1
+       23:  487-block  2
+branch  0 taken 22
+branch  1 taken 1 (fallthrough)
+       22:  488:        int fromScc = sccTopoResults[i]; //从topo第一个Scc开始
+       22:  488-block  0
+call    0 returned 22
+      506:  489:        for (auto &edgesFromScc: edgesBetweenScc[fromScc]) {
+call    0 returned 22
+call    1 returned 22
+call    2 returned 22
+      484:  489-block  0
+call    3 returned 484
+      484:  489-block  1
+call    4 returned 484
+      506:  489-block  2
+call    5 returned 506
+branch  6 taken 484
+branch  7 taken 22 (fallthrough)
+      488:  490:            for (auto &w: edgesFromScc) { //该Scc出发的边
+call    0 returned 484
+call    1 returned 484
+        4:  490-block  0
+call    2 returned 4
+        4:  490-block  1
+call    3 returned 4
+      488:  490-block  2
+call    4 returned 488
+branch  5 taken 4
+branch  6 taken 484 (fallthrough)
+        4:  491:                int from = w->getBegin();
+call    0 returned 4
+branch  1 taken 4 (fallthrough)
+branch  2 taken 0 (throw)
+       4*:  492:                if (dp[from] < 0) {
+        4:  492-block  0
+call    0 returned 4
+branch  1 taken 0 (fallthrough)
+branch  2 taken 4
+    #####:  493:                    continue;
+    %%%%%:  493-block  0
+        -:  494:                }
+        4:  495:                int to = w->getAnEnd();
+        4:  495-block  0
+call    0 returned 4
+branch  1 taken 4 (fallthrough)
+branch  2 taken 0 (throw)
+        4:  496:                int toScc = w->getToSccId();
+        4:  496-block  0
+call    0 returned 4
+branch  1 taken 4 (fallthrough)
+branch  2 taken 0 (throw)
+       12:  497:                for (auto &pointInToScc: sccResult[toScc]) {
+        4:  497-block  0
+call    0 returned 4
+call    1 returned 4
+call    2 returned 4
+        8:  497-block  1
+call    3 returned 8
+        8:  497-block  2
+call    4 returned 8
+       12:  497-block  3
+call    5 returned 12
+branch  6 taken 8
+branch  7 taken 4 (fallthrough)
+        -:  498:                    //更新toScc内的每一个点，记录pre
+        8:  499:                    int tmp = 0;
+        -:  500:
+        8:  501:                    if (config->getState() == configs::word_count) {
+call    0 returned 8
+branch  1 taken 8 (fallthrough)
+branch  2 taken 0
+        8:  502:                        tmp = dp[from] + 1 + sccMaxDist[toScc][to][pointInToScc];
+        8:  502-block  0
+call    0 returned 8
+call    1 returned 8
+call    2 returned 8
+call    3 returned 8
+    #####:  503:                    } else if (config->getState() == configs::char_count) {
+    %%%%%:  503-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  504:                        tmp = dp[from] + w->getLength() + sccMaxDist[toScc][to][pointInToScc];
+    %%%%%:  504-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  504-block  1
+call    4 never executed
+call    5 never executed
+call    6 never executed
+        -:  505:                    }
+        8:  506:                    if (tmp > dp[pointInToScc]) {
+        8:  506-block  0
+call    0 returned 8
+branch  1 taken 8 (fallthrough)
+branch  2 taken 0
+        8:  507:                        dp[pointInToScc] = tmp;
+        8:  507-block  0
+call    0 returned 8
+        8:  508:                        pre[pointInToScc] = w->getId();
+call    0 returned 8
+call    1 returned 8
+branch  2 taken 8 (fallthrough)
+branch  3 taken 0 (throw)
+        8:  508-block  0
+        -:  509:                    }
+        -:  510:                }
+        -:  511:            }
+        -:  512:        }
+        -:  513:    }
+        -:  514:
+        1:  515:    int n = 0;
+        -:  516:    //找到最佳dp
+        1:  517:    if (config->getTailLimit() != -1) { //指定尾字母
+        1:  517-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    #####:  518:        n = config->getTailLimit();
+    %%%%%:  518-block  0
+call    0 never executed
+        -:  519:    } else {
+        1:  520:        int max = -1;
+        1:  521:        n = -1;
+       27:  522:        for (int i = 0; i < MAXN_POINT; i++) {
+        1:  522-block  0
+       26:  522-block  1
+       27:  522-block  2
+branch  0 taken 26
+branch  1 taken 1 (fallthrough)
+       26:  523:            if (dp[i] > max) {
+       26:  523-block  0
+call    0 returned 26
+branch  1 taken 4 (fallthrough)
+branch  2 taken 22
+        4:  524:                max = dp[i];
+        4:  524-block  0
+call    0 returned 4
+        4:  525:                n = i;
+        -:  526:            }
+        -:  527:        }
+        -:  528:    }
+        -:  529:
+        -:  530:    int sccId;
+        1:  531:    getSccId(sccResult, n, sccId);
+        1:  531-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  532:    //这里特判一下，既有-h 又有 -t
+       1*:  533:    if (config->getHeadLimit() != -1 && config->getTailLimit() != -1) {
+        1:  533-block  0
+call    0 returned 1
+branch  1 taken 0 (fallthrough)
+branch  2 taken 1
+    %%%%%:  533-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  533-block  2
+        1:  533-block  3
+        1:  533-block  4
+branch  6 taken 0 (fallthrough)
+branch  7 taken 1
+    #####:  534:        if (pre[n] == -1) {
+    %%%%%:  534-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  535:            int headSccId;
+    #####:  536:            int head = config->getHeadLimit();
+    %%%%%:  536-block  0
+call    0 never executed
+    #####:  537:            getSccId(sccResult, head, headSccId);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  538:            if (sccId == headSccId) {
+    %%%%%:  538-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  539:                result.push_back(sccMaxPathRecord[sccId][head][n]);
+    %%%%%:  539-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  540:                return 0;
+    %%%%%:  540-block  0
+        -:  541:            } else {
+    #####:  542:                return 0;
+    %%%%%:  542-block  0
+        -:  543:            }
+        -:  544:        }
+        -:  545:    }
+        -:  546:
+        -:  547:    while (true) {
+        2:  548:        if (pre[n] == -1) {
+        2:  548-block  0
+call    0 returned 2
+branch  1 taken 1 (fallthrough)
+branch  2 taken 1
+        -:  549:
+        1:  550:            int max = 0;
+        1:  551:            int rec = -1;
+        1:  552:            getSccId(sccResult, n, sccId);
+        1:  552-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  553:            int head = config->getHeadLimit();
+        1:  553-block  0
+call    0 returned 1
+        1:  554:            if(head != -1) {
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+    #####:  555:                result.push_back(sccMaxPathRecord[sccId][head][n]);
+    %%%%%:  555-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  556:                break;
+    %%%%%:  556-block  0
+        -:  557:            }
+       27:  558:            for (int j = 0; j < MAXN_POINT; j++) { //找到第i个scc，sccMaxDist第point列的最大值
+        1:  558-block  0
+       26:  558-block  1
+       27:  558-block  2
+branch  0 taken 26
+branch  1 taken 1 (fallthrough)
+       26:  559:                if (sccMaxDist[sccId][j][n] > max) {
+       26:  559-block  0
+call    0 returned 26
+call    1 returned 26
+call    2 returned 26
+branch  3 taken 1 (fallthrough)
+branch  4 taken 25
+        1:  560:                    max = sccMaxDist[sccId][j][n];
+        1:  560-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        1:  561:                    rec = j;
+        -:  562:                }
+        -:  563:            }
+        1:  564:            if (rec == -1) {
+        1:  564-block  0
+branch  0 taken 0 (fallthrough)
+branch  1 taken 1
+        -:  565:                //找不到大于0，说明没有以这个点结尾的路径
+    #####:  566:                vector<string> v;
+    %%%%%:  566-block  0
+call    0 never executed
+    #####:  567:                result.push_back(v);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  568:            } else {
+    %%%%%:  568-block  0
+call    0 never executed
+    $$$$$:  568-block  1
+call    1 never executed
+        1:  569:                result.push_back(sccMaxPathRecord[sccId][rec][n]);
+        1:  569-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        -:  570:            }
+        1:  571:            break;
+        1:  571-block  0
+        -:  572:        } else {
+        1:  573:            Word &w = const_cast<Word &>(graph.getEdges()[pre[n]]);
+        1:  573-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+        1:  574:            int from = w.getBegin();
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  575:            int to = w.getAnEnd();
+        1:  575-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  576:            getSccId(sccResult, n, sccId);
+        1:  576-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  577:            result.push_back(sccMaxPathRecord[sccId][to][n]);
+        1:  577-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        3:  578:            vector<string> s({w.getStr()});
+        1:  578-block  0
+call    0 returned 1
+call    1 returned 1
+branch  2 taken 1 (fallthrough)
+branch  3 taken 0 (throw)
+        1:  578-block  1
+call    4 returned 1
+branch  5 taken 1 (fallthrough)
+branch  6 taken 0 (throw)
+        1:  578-block  2
+call    7 returned 1
+branch  8 taken 1 (fallthrough)
+branch  9 taken 0 (throw)
+        1:  578-block  3
+        1:  578-block  4
+call   10 returned 1
+        1:  578-block  5
+call   11 returned 1
+    $$$$$:  578-block  6
+    $$$$$:  578-block  7
+call   12 never executed
+    $$$$$:  578-block  8
+    $$$$$:  578-block  9
+        1:  579:            result.push_back(s);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  580:            n = from;
+        1:  581:        }
+        1:  581-block  0
+call    0 returned 1
+    $$$$$:  581-block  1
+call    1 never executed
+        1:  582:    }
+        -:  583:
+        1:  584:    return 0;
+        1:  584-block  0
+        1:  585:}
+        1:  585-block  0
+call    0 returned 1
+call    1 returned 1
+call    2 returned 1
+call    3 returned 1
+call    4 returned 1
+call    5 returned 1
+call    6 returned 1
+        1:  585-block  1
+call    7 returned 1
+    $$$$$:  585-block  2
+call    8 never executed
+    $$$$$:  585-block  3
+call    9 never executed
+    $$$$$:  585-block  4
+call   10 never executed
+    $$$$$:  585-block  5
+call   11 never executed
+    $$$$$:  585-block  6
+call   12 never executed
+    $$$$$:  585-block  7
+call   13 never executed
+    $$$$$:  585-block  8
+call   14 never executed
+    $$$$$:  585-block  9
+call   15 never executed
+        -:  586:
+        -:  587:

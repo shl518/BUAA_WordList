@@ -1,0 +1,285 @@
+        -:    0:Source:F:/develop/src/core/API.cpp
+        -:    0:Graph:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\API.cpp.gcno
+        -:    0:Data:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\API.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by cychen on 2023/3/7.
+        -:    3://
+        -:    4:
+        -:    5:#include "API.h"
+        -:    6:#include "Controller.h"
+        -:    7:#include "../error/Error.h"
+        -:    8:#include <iostream>
+        -:    9:using namespace std;
+function _Z14gen_chains_allPPciRS0_ called 0 returned 0% blocks executed 0%
+    #####:   10:int gen_chains_all(char* words[], int len, char** &result){
+    #####:   11:    Config* config = Config::getInstance();
+    %%%%%:   11-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   12:
+    #####:   13:    config->setState(configs::num);
+    %%%%%:   13-block  0
+call    0 never executed
+    #####:   14:    checkConfig();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   15:    vector<std::string> str_vector;
+    %%%%%:   15-block  0
+call    0 never executed
+        -:   16:
+    #####:   17:    for (int i = 0; i < len; i++) {
+    %%%%%:   17-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   18:        string str(words[i]);
+    %%%%%:   18-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    $$$$$:   18-block  1
+    #####:   19:        str_vector.push_back(str);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   20:    }
+    %%%%%:   20-block  0
+call    0 never executed
+    $$$$$:   20-block  1
+call    1 never executed
+    #####:   21:    vector<vector<string>> preResult;
+    %%%%%:   21-block  0
+call    0 never executed
+    #####:   22:    genChainsAllCtrl(str_vector,preResult);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   23:
+        -:   24:    //输出
+    #####:   25:    getOutPutChar(preResult,result);
+    %%%%%:   25-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   25-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   25-block  2
+call    6 never executed
+    $$$$$:   25-block  3
+call    7 never executed
+    $$$$$:   25-block  4
+    #####:   26:    return 0;
+    %%%%%:   26-block  0
+        -:   27:
+    #####:   28:}
+call    0 never executed
+call    1 never executed
+    $$$$$:   28-block  0
+call    2 never executed
+    $$$$$:   28-block  1
+call    3 never executed
+function _Z14gen_chain_wordPPciRS0_cccb called 2 returned 100% blocks executed 71%
+        2:   29:int gen_chain_word(char* words[], int len, char** &result, char head, char tail, char reject, bool enable_loop){
+        2:   30:    Config* config = Config::getInstance();
+        2:   30-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   31:    if(!isalpha(head)){
+        2:   31-block  0
+branch  0 taken 1 (fallthrough)
+branch  1 taken 1
+        1:   32:        config->setHeadLimit(-1);
+        1:   32-block  0
+call    0 returned 1
+        -:   33:    } else{
+        1:   34:        config->setHeadLimit(head-'a');
+        1:   34-block  0
+call    0 returned 1
+        -:   35:    }
+        2:   36:    if(!isalpha(tail)){
+        2:   36-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 0
+        2:   37:        config->setTailLimit(-1);
+        2:   37-block  0
+call    0 returned 2
+        -:   38:    } else{
+    #####:   39:        config->setTailLimit(tail-'a');
+    %%%%%:   39-block  0
+call    0 never executed
+        -:   40:    }
+        2:   41:    if(!isalpha(reject)){
+        2:   41-block  0
+branch  0 taken 2 (fallthrough)
+branch  1 taken 0
+        2:   42:        config->setRejectLimit(-1);
+        2:   42-block  0
+call    0 returned 2
+        -:   43:    } else{
+    #####:   44:        config->setRejectLimit(reject-'a');
+    %%%%%:   44-block  0
+call    0 never executed
+        -:   45:    }
+        2:   46:    config->setRing(enable_loop);
+        2:   46-block  0
+call    0 returned 2
+        2:   47:    config->setState(configs::word_count);
+call    0 returned 2
+        2:   48:    checkConfig();
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   49:    vector<std::string> str_vector;
+        2:   49-block  0
+call    0 returned 2
+        -:   50:
+       25:   51:    for (int i = 0; i < len; i++) {
+       25:   51-block  0
+branch  0 taken 23
+branch  1 taken 2 (fallthrough)
+       23:   52:        string str(words[i]);
+       23:   52-block  0
+call    0 returned 23
+call    1 returned 23
+branch  2 taken 23 (fallthrough)
+branch  3 taken 0 (throw)
+    $$$$$:   52-block  1
+       23:   53:        str_vector.push_back(str);
+call    0 returned 23
+branch  1 taken 23 (fallthrough)
+branch  2 taken 0 (throw)
+       23:   54:    }
+       23:   54-block  0
+call    0 returned 23
+    $$$$$:   54-block  1
+call    1 never executed
+        2:   55:    vector<string> preResult;
+        2:   55-block  0
+call    0 returned 2
+        2:   56:    genChainWordCtrl(str_vector,preResult);
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   57:    vectorToCharArray(preResult,result);
+        2:   57-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   58:    int l = static_cast<int>(preResult.size());
+        2:   58-block  0
+call    0 returned 2
+        2:   59:    return l;
+        2:   59-block  0
+        2:   60:}
+call    0 returned 2
+call    1 returned 2
+    $$$$$:   60-block  0
+call    2 never executed
+    $$$$$:   60-block  1
+call    3 never executed
+        -:   61:
+function _Z14gen_chain_charPPciRS0_cccb called 0 returned 0% blocks executed 0%
+    #####:   62:int gen_chain_char(char* words[], int len, char** &result, char head, char tail, char reject, bool enable_loop){
+    #####:   63:    Config* config = Config::getInstance();
+    %%%%%:   63-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   64:    if(!isalpha(head)){
+    %%%%%:   64-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   65:        config->setHeadLimit(-1);
+    %%%%%:   65-block  0
+call    0 never executed
+        -:   66:    } else{
+    #####:   67:        config->setHeadLimit(head-'a');
+    %%%%%:   67-block  0
+call    0 never executed
+        -:   68:    }
+    #####:   69:    if(!isalpha(tail)){
+    %%%%%:   69-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   70:        config->setTailLimit(-1);
+    %%%%%:   70-block  0
+call    0 never executed
+        -:   71:    } else{
+    #####:   72:        config->setTailLimit(tail-'a');
+    %%%%%:   72-block  0
+call    0 never executed
+        -:   73:    }
+    #####:   74:    if(!isalpha(reject)){
+    %%%%%:   74-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   75:        config->setRejectLimit(-1);
+    %%%%%:   75-block  0
+call    0 never executed
+        -:   76:    } else{
+    #####:   77:        config->setRejectLimit(reject-'a');
+    %%%%%:   77-block  0
+call    0 never executed
+        -:   78:    }
+    #####:   79:    config->setRing(enable_loop);
+    %%%%%:   79-block  0
+call    0 never executed
+    #####:   80:    config->setState(configs::char_count);
+call    0 never executed
+    #####:   81:    checkConfig();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   82:    vector<std::string> str_vector;
+    %%%%%:   82-block  0
+call    0 never executed
+        -:   83:
+    #####:   84:    for (int i = 0; i < len; i++) {
+    %%%%%:   84-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   85:        string str(words[i]);
+    %%%%%:   85-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    $$$$$:   85-block  1
+    #####:   86:        str_vector.push_back(str);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   87:    }
+    %%%%%:   87-block  0
+call    0 never executed
+    $$$$$:   87-block  1
+call    1 never executed
+    #####:   88:    vector<string> preResult;
+    %%%%%:   88-block  0
+call    0 never executed
+    #####:   89:    genChainCharCtrl(str_vector,preResult);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   90:    vectorToCharArray(preResult,result);
+    %%%%%:   90-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   91:    return static_cast<int>(preResult.size());
+    %%%%%:   91-block  0
+call    0 never executed
+    %%%%%:   91-block  1
+    #####:   92:}
+call    0 never executed
+call    1 never executed
+    $$$$$:   92-block  0
+call    2 never executed
+    $$$$$:   92-block  1
+call    3 never executed

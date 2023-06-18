@@ -1,0 +1,687 @@
+        -:    0:Source:F:/develop/src/core/Controller.cpp
+        -:    0:Graph:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\Controller.cpp.gcno
+        -:    0:Data:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\Controller.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by cychen on 2023/3/10.
+        -:    3://
+        -:    4:
+        -:    5:#include <iostream>
+        -:    6:#include "Controller.h"
+        -:    7:#include "../postprocess/Output.h"
+        -:    8:#include "../core/Graph.h"
+        -:    9:#include "../core/Utils.h"
+        -:   10:#include "../error/ErrorCode.h"
+        -:   11:#include "../error/Error.h"
+        -:   12:
+function _Z15execCalculationRSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE called 0 returned 0% blocks executed 0%
+    #####:   13:int execCalculation(vector<string> &words) {
+    #####:   14:    int r = 0;
+    #####:   15:    Config *config = Config::getInstance();
+    %%%%%:   15-block  0
+call    0 never executed
+        -:   16:
+    #####:   17:    switch (config->getState()) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:   18:        case configs::num: {
+    #####:   19:            vector<vector<string>> allChains;
+    %%%%%:   19-block  0
+call    0 never executed
+    #####:   20:            genChainsAllCtrl(words, allChains);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   21:            printChainList(allChains);
+    %%%%%:   21-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   22:            break;
+    %%%%%:   22-block  0
+    #####:   23:        }
+    %%%%%:   23-block  0
+call    0 never executed
+    $$$$$:   23-block  1
+call    1 never executed
+    #####:   24:        case configs::word_count: {
+    #####:   25:            vector<string> wordChain;
+    %%%%%:   25-block  0
+call    0 never executed
+    #####:   26:            genChainWordCtrl(words, wordChain);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   27:            printChain(wordChain);
+    %%%%%:   27-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   28:            break;
+    %%%%%:   28-block  0
+    #####:   29:        }
+    %%%%%:   29-block  0
+call    0 never executed
+    $$$$$:   29-block  1
+call    1 never executed
+    #####:   30:        case configs::char_count: {
+    #####:   31:            vector<string> charChain;
+    %%%%%:   31-block  0
+call    0 never executed
+    #####:   32:            genChainCharCtrl(words, charChain);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   33:            printChain(charChain);
+    %%%%%:   33-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   34:            break;
+    %%%%%:   34-block  0
+    #####:   35:        }
+    %%%%%:   35-block  0
+call    0 never executed
+    $$$$$:   35-block  1
+call    1 never executed
+    #####:   36:        case configs::empty:
+    #####:   37:            cout << "Config is empty" << endl;
+    %%%%%:   37-block  0
+call    0 never executed
+call    1 never executed
+    #####:   38:            r = -1;
+    #####:   39:            std::exit(0);
+call    0 never executed
+    #####:   40:        default:
+    #####:   41:            std::exit(0);
+    %%%%%:   41-block  0
+call    0 never executed
+        -:   42:    }
+    #####:   43:    return r;
+    %%%%%:   43-block  0
+    %%%%%:   43-block  1
+        -:   44:}
+        -:   45:
+        -:   46:
+function _Z16genChainsAllCtrlRSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EERS_IS7_SaIS7_EE called 0 returned 0% blocks executed 0%
+    #####:   47:int genChainsAllCtrl(vector<string> &words, vector<vector<string>> &result) {
+        -:   48:    //直接调用dfs遍历所有路径即可
+    #####:   49:    int r = 0;
+    #####:   50:    vector<Word> edges;
+    %%%%%:   50-block  0
+call    0 never executed
+    #####:   51:    genWordFromList(words, edges);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   52:    Graph graph = Graph(edges);
+    %%%%%:   52-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   53:    if (hasCycle(graph)) {
+    %%%%%:   53-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   53-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:   54:        r = NOT_EXIST_RING_PARA;
+    #####:   55:        throwError(r, NO_INFO);
+    %%%%%:   55-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   55-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:   55-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:   55-block  3
+call    9 never executed
+    $$$$$:   55-block  4
+    $$$$$:   55-block  5
+call   10 never executed
+    $$$$$:   55-block  6
+        -:   56:    }
+    #####:   57:    for (int i = 0; i < edges.size(); ++i) {
+    %%%%%:   57-block  0
+    %%%%%:   57-block  1
+    %%%%%:   57-block  2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   58:        cout << edges[i].getId() << endl;
+    %%%%%:   58-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   58-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:   58-block  2
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+        -:   59:    }
+    #####:   60:    for (int i = 0; i < 26; ++i) {
+    %%%%%:   60-block  0
+    %%%%%:   60-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:   61:        vector<bool> visited(graph.getEdgeCnt(), false);
+    %%%%%:   61-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:   61-block  1
+call    5 never executed
+    $$$$$:   61-block  2
+    $$$$$:   61-block  3
+    #####:   62:        vector<string> path;
+call    0 never executed
+    #####:   63:        dfsGraph(graph, i, true, visited, path, result);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   63-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   63-block  1
+call    6 never executed
+    $$$$$:   63-block  2
+call    7 never executed
+    $$$$$:   63-block  3
+    #####:   64:    }
+call    0 never executed
+call    1 never executed
+    $$$$$:   64-block  0
+call    2 never executed
+    $$$$$:   64-block  1
+call    3 never executed
+        -:   65:
+    #####:   66:    return r;
+    %%%%%:   66-block  0
+    #####:   67:}
+    %%%%%:   67-block  0
+call    0 never executed
+call    1 never executed
+    $$$$$:   67-block  1
+call    2 never executed
+    $$$$$:   67-block  2
+call    3 never executed
+        -:   68:
+function _Z16genChainWordCtrlRSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EES8_ called 2 returned 100% blocks executed 63%
+        2:   69:int genChainWordCtrl(vector<string> &words, vector<string> &result) {
+        2:   70:    Config *config = Config::getInstance();
+        2:   70-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   71:    //TODO 目前仅适用于无环
+        2:   72:    int r = 0;
+        2:   73:    vector<Word> edges;
+        2:   73-block  0
+call    0 returned 2
+        2:   74:    genWordFromList(words, edges);
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   75:    Graph graph = Graph(edges);
+        2:   75-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   76:    if (!config->isRing()) {
+        2:   76-block  0
+call    0 returned 2
+branch  1 taken 1 (fallthrough)
+branch  2 taken 1
+        1:   77:        if (hasCycle(graph)) {
+        1:   77-block  0
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   77-block  1
+branch  3 taken 0 (fallthrough)
+branch  4 taken 1
+    #####:   78:            r = NOT_EXIST_RING_PARA;
+    #####:   79:            throwError(r, NO_INFO);
+    %%%%%:   79-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   79-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:   79-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:   79-block  3
+call    9 never executed
+    $$$$$:   79-block  4
+    $$$$$:   79-block  5
+call   10 never executed
+    $$$$$:   79-block  6
+        -:   80:        }
+        1:   81:        vector<int> dp_results;
+        1:   81-block  0
+call    0 returned 1
+        -:   82:        //直接调用dp_loopless返回逆序结果
+        1:   83:        dp_loopless(graph, dp_results);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:   83-block  0
+call    3 returned 1
+branch  4 taken 1 (fallthrough)
+branch  5 taken 0 (throw)
+        1:   83-block  1
+call    6 returned 1
+    $$$$$:   83-block  2
+call    7 never executed
+    $$$$$:   83-block  3
+        1:   84:        int len = static_cast<int>(dp_results.size());
+call    0 returned 1
+        4:   85:        for (int i = len - 1; i >= 0; i--) {
+        4:   85-block  0
+branch  0 taken 3
+branch  1 taken 1 (fallthrough)
+        -:   86:            //逆向遍历
+        3:   87:            int point = dp_results[i];
+        3:   87-block  0
+call    0 returned 3
+        3:   88:            if (i < len - 1) {
+branch  0 taken 2 (fallthrough)
+branch  1 taken 1
+        2:   89:                Word betweenPath = graph.getEdgeBetween(dp_results[i + 1], dp_results[i]);
+        2:   89-block  0
+call    0 returned 2
+call    1 returned 2
+call    2 returned 2
+branch  3 taken 2 (fallthrough)
+branch  4 taken 0 (throw)
+        2:   90:                result.push_back(betweenPath.getStr());
+        2:   90-block  0
+call    0 returned 2
+branch  1 taken 2 (fallthrough)
+branch  2 taken 0 (throw)
+        2:   90-block  1
+call    3 returned 2
+branch  4 taken 2 (fallthrough)
+branch  5 taken 0 (throw)
+        2:   91:            }
+        2:   91-block  0
+call    0 returned 2
+    $$$$$:   91-block  1
+call    1 never executed
+        3:   92:            vector<string> selfPath = graph.getSelfEdgeChain(point);
+        3:   92-block  0
+call    0 returned 3
+branch  1 taken 3 (fallthrough)
+branch  2 taken 0 (throw)
+        4:   93:            for (auto &str: selfPath) {
+        3:   93-block  0
+call    0 returned 3
+call    1 returned 3
+        1:   93-block  1
+call    2 returned 1
+        1:   93-block  2
+call    3 returned 1
+        4:   93-block  3
+call    4 returned 4
+branch  5 taken 1
+branch  6 taken 3 (fallthrough)
+        1:   94:                result.push_back(str);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   95:            }
+        3:   96:        }
+        3:   96-block  0
+call    0 returned 3
+    $$$$$:   96-block  1
+call    1 never executed
+        1:   97:    } else {
+        1:   97-block  0
+call    0 returned 1
+    $$$$$:   97-block  1
+call    1 never executed
+        1:   98:        vector<vector<string>> dp_loop_results;
+        1:   98-block  0
+call    0 returned 1
+        1:   99:        dp_loop(graph, dp_loop_results);
+call    0 returned 1
+branch  1 taken 1 (fallthrough)
+branch  2 taken 0 (throw)
+        1:  100:        int s = static_cast<int>(dp_loop_results.size());
+        1:  100-block  0
+call    0 returned 1
+        4:  101:        for (int i = s - 1; i >= 0; i--) {
+        3:  101-block  0
+        4:  101-block  1
+branch  0 taken 3
+branch  1 taken 1 (fallthrough)
+       18:  102:            for (auto &str: dp_loop_results[i]) {
+        3:  102-block  0
+call    0 returned 3
+call    1 returned 3
+call    2 returned 3
+       15:  102-block  1
+call    3 returned 15
+       15:  102-block  2
+call    4 returned 15
+       18:  102-block  3
+call    5 returned 18
+branch  6 taken 15
+branch  7 taken 3 (fallthrough)
+       15:  103:                result.push_back(str);
+call    0 returned 15
+branch  1 taken 15 (fallthrough)
+branch  2 taken 0 (throw)
+        -:  104:            }
+        -:  105:        }
+        -:  106:
+        1:  107:    }
+        1:  107-block  0
+call    0 returned 1
+    $$$$$:  107-block  1
+call    1 never executed
+        2:  108:    return 0;
+        2:  108-block  0
+        2:  109:};
+        2:  109-block  0
+call    0 returned 2
+call    1 returned 2
+    $$$$$:  109-block  1
+call    2 never executed
+    $$$$$:  109-block  2
+call    3 never executed
+        -:  110:
+function _Z16genChainCharCtrlRSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EES8_ called 0 returned 0% blocks executed 0%
+    #####:  111:int genChainCharCtrl(vector<string> &words, vector<string> &result) {
+    #####:  112:    Config *config = Config::getInstance();
+    %%%%%:  112-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  113:    int r = 0;
+    #####:  114:    vector<Word> edges;
+    %%%%%:  114-block  0
+call    0 never executed
+    #####:  115:    genWordFromList(words, edges);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  116:    Graph graph = Graph(edges);
+    %%%%%:  116-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  117:    if (!config->isRing()) {
+    %%%%%:  117-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  118:        if (hasCycle(graph)) {
+    %%%%%:  118-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  118-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:  119:            r = NOT_EXIST_RING_PARA;
+    #####:  120:            throwError(r, NO_INFO);
+    %%%%%:  120-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  120-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  120-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:  120-block  3
+call    9 never executed
+    $$$$$:  120-block  4
+    $$$$$:  120-block  5
+call   10 never executed
+    $$$$$:  120-block  6
+        -:  121:        }
+    #####:  122:        vector<int> dp_results;
+    %%%%%:  122-block  0
+call    0 never executed
+        -:  123:        //直接调用dp_loopless返回逆序结果
+    #####:  124:        dp_loopless(graph, dp_results);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  124-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:  124-block  1
+call    6 never executed
+    $$$$$:  124-block  2
+call    7 never executed
+    $$$$$:  124-block  3
+    #####:  125:        int len = static_cast<int>(dp_results.size());
+call    0 never executed
+    #####:  126:        for (int i = len - 1; i >= 0; i--) {
+    %%%%%:  126-block  0
+branch  0 never executed
+branch  1 never executed
+        -:  127:            //逆向遍历
+    #####:  128:            int point = dp_results[i];
+    %%%%%:  128-block  0
+call    0 never executed
+    #####:  129:            if (i < len - 1) {
+branch  0 never executed
+branch  1 never executed
+    #####:  130:                Word betweenPath = graph.getEdgeBetween(dp_results[i + 1], dp_results[i], true);
+    %%%%%:  130-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  131:                result.push_back(betweenPath.getStr());
+    %%%%%:  131-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  131-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  132:            }
+    %%%%%:  132-block  0
+call    0 never executed
+    $$$$$:  132-block  1
+call    1 never executed
+    #####:  133:            vector<string> selfPath = graph.getSelfEdgeChain(point);
+    %%%%%:  133-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  134:            result.insert(result.end(), selfPath.begin(), selfPath.end());
+    %%%%%:  134-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    $$$$$:  134-block  1
+    $$$$$:  134-block  2
+    #####:  135:        }
+    %%%%%:  135-block  0
+call    0 never executed
+    $$$$$:  135-block  1
+call    1 never executed
+    #####:  136:    } else {
+    %%%%%:  136-block  0
+call    0 never executed
+    $$$$$:  136-block  1
+call    1 never executed
+    #####:  137:        vector<vector<string>> dp_loop_results;
+    %%%%%:  137-block  0
+call    0 never executed
+    #####:  138:        dp_loop(graph, dp_loop_results);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  139:        int s = static_cast<int>(dp_loop_results.size());
+    %%%%%:  139-block  0
+call    0 never executed
+    #####:  140:        for (int i = s - 1; i >= 0; i--) {
+    %%%%%:  140-block  0
+    %%%%%:  140-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  141:            for (auto &str: dp_loop_results[i]) {
+    %%%%%:  141-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    %%%%%:  141-block  1
+call    3 never executed
+    %%%%%:  141-block  2
+call    4 never executed
+    %%%%%:  141-block  3
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    #####:  142:                result.push_back(str);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  143:            }
+        -:  144:        }
+    #####:  145:    }
+    %%%%%:  145-block  0
+call    0 never executed
+    $$$$$:  145-block  1
+call    1 never executed
+    #####:  146:    return 0;
+    %%%%%:  146-block  0
+    #####:  147:}
+    %%%%%:  147-block  0
+call    0 never executed
+call    1 never executed
+    $$$$$:  147-block  1
+call    2 never executed
+    $$$$$:  147-block  2
+call    3 never executed
+        -:  148:
+function _Z13getOutPutCharSt6vectorIS_INSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EESaIS7_EEPPc called 0 returned 0% blocks executed 0%
+    #####:  149:int getOutPutChar(vector<vector<string>> vec, char *result[]) {
+    #####:  150:    result = new char *[vec.size()];
+    %%%%%:  150-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  150-block  1
+    %%%%%:  150-block  2
+call    3 never executed
+    %%%%%:  150-block  3
+call    4 never executed
+        -:  151:
+    #####:  152:    for (size_t i = 0; i < vec.size(); ++i) {
+    %%%%%:  152-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  153:        string str_line;
+    %%%%%:  153-block  0
+call    0 never executed
+    #####:  154:        unsigned long long l = vec[i].size();
+call    0 never executed
+call    1 never executed
+    #####:  155:        for (unsigned long long j = 0; i < l; i++) {
+    %%%%%:  155-block  0
+    %%%%%:  155-block  1
+branch  0 never executed
+branch  1 never executed
+    #####:  156:            str_line += vec[i][j];
+    %%%%%:  156-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  157:            if(j < l-1){
+    %%%%%:  157-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  158:                str_line += " ";
+    %%%%%:  158-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  159:            }
+        -:  160:        }
+    #####:  161:        result[i] = new char[str_line.size() + 1];
+    %%%%%:  161-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  162:        strcpy(result[i], str_line.c_str());
+    %%%%%:  162-block  0
+call    0 never executed
+    #####:  163:    }
+call    0 never executed
+    $$$$$:  163-block  0
+call    1 never executed
+    #####:  164:    return 0;
+    %%%%%:  164-block  0
+    %%%%%:  164-block  1
+        -:  165:}
+        -:  166:
+function _Z17vectorToCharArrayRSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EERPPc called 2 returned 100% blocks executed 100%
+        2:  167:int vectorToCharArray(vector<string>& strings,char** &result) {
+        2:  168:    const int size = strings.size();
+        2:  168-block  0
+call    0 returned 2
+        -:  169:
+        -:  170:    // Allocate memory for char*[] array
+        2:  171:    result = (char**) malloc(size * sizeof(char*));
+        -:  172:
+        -:  173:    // Convert each string to char* pointer and store in char*[] array
+       20:  174:    for (int i = 0; i < size; i++) {
+       20:  174-block  0
+branch  0 taken 18
+branch  1 taken 2 (fallthrough)
+       18:  175:        const char* str = strings[i].c_str();
+       18:  175-block  0
+call    0 returned 18
+call    1 returned 18
+       18:  176:        char* charPtr = (char*) malloc((strlen(str) + 1) * sizeof(char));
+       18:  177:        strcpy(charPtr, str);
+       18:  178:        result[i] = charPtr;
+        -:  179:    }
+        2:  180:    return 0;
+        2:  180-block  0
+        -:  181:}
+        -:  182:

@@ -1,0 +1,91 @@
+        -:    0:Source:F:/develop/src/postprocess/Output.cpp
+        -:    0:Graph:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\postprocess\Output.cpp.gcno
+        -:    0:Data:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\postprocess\Output.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by cychen on 2023/3/8.
+        -:    3://
+        -:    4:
+        -:    5:#include "Output.h"
+        -:    6:#include <iostream>
+        -:    7:#include <vector>
+        -:    8:#include <string>
+        -:    9:
+        -:   10:using namespace std;
+        -:   11:
+function _Z14printChainListRSt6vectorIS_INSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EESaIS7_EE called 0 returned 0% blocks executed 0%
+    #####:   12:int printChainList(vector<vector<string>> &chain_list) {
+    #####:   13:    int r = 0;
+    #####:   14:    int count = static_cast<int>(chain_list.size());
+    %%%%%:   14-block  0
+call    0 never executed
+        -:   15:
+    #####:   16:    cout << count << endl;
+call    0 never executed
+call    1 never executed
+        -:   17:
+    #####:   18:    for (auto &i: chain_list) {
+call    0 never executed
+call    1 never executed
+    %%%%%:   18-block  0
+call    2 never executed
+    %%%%%:   18-block  1
+call    3 never executed
+    %%%%%:   18-block  2
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:   19:        printChain(i);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   20:        cout << endl;
+    %%%%%:   20-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   21:    }
+    #####:   22:    return r;
+    %%%%%:   22-block  0
+    %%%%%:   22-block  1
+        -:   23:}
+        -:   24:
+function _Z10printChainRSt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS5_EE called 0 returned 0% blocks executed 0%
+    #####:   25:int printChain(vector<string> &chain) {
+    #####:   26:    int r = 0;
+    #####:   27:    if(chain.size() < 2) {
+    %%%%%:   27-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   28:        return 0;
+    %%%%%:   28-block  0
+        -:   29:    }
+    #####:   30:    for (auto &i: chain) {
+    %%%%%:   30-block  0
+call    0 never executed
+call    1 never executed
+    %%%%%:   30-block  1
+call    2 never executed
+    %%%%%:   30-block  2
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:   31:        cout << i + " ";
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   31-block  0
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    %%%%%:   31-block  1
+call    6 never executed
+call    7 never executed
+    $$$$$:   31-block  2
+call    8 never executed
+    $$$$$:   31-block  3
+        -:   32:    }
+    #####:   33:    return r;
+    %%%%%:   33-block  0
+        -:   34:}

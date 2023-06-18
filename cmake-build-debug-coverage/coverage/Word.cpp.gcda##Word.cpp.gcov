@@ -1,0 +1,106 @@
+        -:    0:Source:F:/develop/src/core/Word.cpp
+        -:    0:Graph:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\Word.cpp.gcno
+        -:    0:Data:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\Word.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by cychen on 2023/3/7.
+        -:    3://
+        -:    4:
+        -:    5:#include <string>
+        -:    6:#include "Word.h"
+        -:    7:#include "Utils.h"
+        -:    8:
+function _ZN4WordC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 42 returned 100% blocks executed 90%
+       42:    9:Word::Word(const std::string &str) : str(str) {
+       42:    9-block  0
+call    0 returned 42
+       42:   10:    this->str = str;
+call    0 returned 42
+branch  1 taken 42 (fallthrough)
+branch  2 taken 0 (throw)
+       42:   11:    this->begin = char2int(str[0]);
+       42:   11-block  0
+call    0 returned 42
+call    1 returned 42
+branch  2 taken 42 (fallthrough)
+branch  3 taken 0 (throw)
+       42:   12:    this->end = char2int(str.back());
+       42:   12-block  0
+call    0 returned 42
+call    1 returned 42
+branch  2 taken 42 (fallthrough)
+branch  3 taken 0 (throw)
+       42:   13:    this->length = (int) str.length();
+       42:   13-block  0
+call    0 returned 42
+       42:   14:    this->toSccId = -1;
+       42:   15:}
+    $$$$$:   15-block  0
+call    0 never executed
+        -:   16:
+function _ZN4WordC2Ev called 2 returned 100% blocks executed 67%
+        2:   17:Word::Word() {
+        2:   17-block  0
+call    0 returned 2
+        2:   18:    this->str = std::string("");
+call    0 returned 2
+call    1 returned 2
+branch  2 taken 2 (fallthrough)
+branch  3 taken 0 (throw)
+        2:   18-block  0
+call    4 returned 2
+call    5 returned 2
+call    6 returned 2
+    $$$$$:   18-block  1
+call    7 never executed
+    $$$$$:   18-block  2
+        2:   19:    this->id = -1;
+        2:   20:    this->begin = this->end = this->length = 0;
+        2:   21:}
+    $$$$$:   21-block  0
+call    0 never executed
+        -:   22:
+function _ZNK4Word6getStrB5cxx11Ev called 4781 returned 100% blocks executed 100%
+     4781:   23:const std::string &Word::getStr() const {
+     4781:   24:    return str;
+     4781:   24-block  0
+        -:   25:}
+        -:   26:
+function _ZNK4Word8getBeginEv called 562 returned 100% blocks executed 100%
+      562:   27:int Word::getBegin() const {
+      562:   28:    return begin;
+      562:   28-block  0
+        -:   29:}
+        -:   30:
+function _ZNK4Word8getAnEndEv called 13483 returned 100% blocks executed 100%
+    13483:   31:int Word::getAnEnd() const {
+    13483:   32:    return end;
+    13483:   32-block  0
+        -:   33:}
+        -:   34:
+function _ZNK4Word9getLengthEv called 15 returned 100% blocks executed 100%
+       15:   35:int Word::getLength() const {
+       15:   36:    return length;
+       15:   36-block  0
+        -:   37:}
+        -:   38:
+function _ZN4Word5setIdEi called 42 returned 100% blocks executed 100%
+       42:   39:void Word::setId(int _id) {
+       42:   40:    Word::id = _id;
+       42:   41:}
+function _ZN4Word10setToSccIdEi called 4 returned 100% blocks executed 100%
+        4:   42:void Word::setToSccId(int _id) {
+        4:   43:    Word::toSccId = _id;
+        4:   44:}
+        -:   45:
+function _ZNK4Word10getToSccIdEv called 4 returned 100% blocks executed 100%
+        4:   46:int Word::getToSccId() const {
+        4:   47:    return toSccId;
+        4:   47-block  0
+        -:   48:}
+        -:   49:
+function _ZNK4Word5getIdEv called 8 returned 100% blocks executed 100%
+        8:   50:int Word::getId() const {
+        8:   51:    return id;
+        8:   51-block  0
+        -:   52:}

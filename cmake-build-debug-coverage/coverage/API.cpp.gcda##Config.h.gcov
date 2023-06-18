@@ -1,0 +1,100 @@
+        -:    0:Source:F:/develop/src/preprocess/Config.h
+        -:    0:Graph:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\API.cpp.gcno
+        -:    0:Data:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\API.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by cychen on 2023/3/8.
+        -:    3://
+        -:    4:
+        -:    5:#ifndef LIST_CONFIG_H
+        -:    6:#define LIST_CONFIG_H
+        -:    7:#include <string>
+        -:    8:#include <ostream>
+        -:    9:using namespace std;
+        -:   10:
+        -:   11:enum configs {
+        -:   12:    empty,
+        -:   13:    num,
+        -:   14:    word_count,
+        -:   15:    char_count,
+        -:   16:};
+        -:   17:
+        -:   18:class Config {
+        -:   19:private:
+        -:   20:    static Config *instance;
+        -:   21:    bool ring = false;
+        -:   22:    int headLimit = -1;
+        -:   23:    int tailLimit = -1;
+        -:   24:    int rejectLimit = -1;
+        -:   25:    configs state = empty;
+        -:   26:    string filePath;
+        -:   27:
+        -:   28:    Config() = default;
+        -:   29:
+        -:   30:public:
+        -:   31:    static Config* getInstance();
+        -:   32:
+function _ZN6Config7setRingEb called 2 returned 100% blocks executed 100%
+        2:   33:    void setRing(bool _ring) {
+        2:   34:        Config::ring = _ring;
+        2:   35:    }
+        -:   36:
+function _ZN6Config12setHeadLimitEi called 2 returned 100% blocks executed 100%
+        2:   37:    void setHeadLimit(int _headLimit) {
+        2:   38:        Config::headLimit = _headLimit;
+        2:   39:    }
+        -:   40:
+function _ZN6Config12setTailLimitEi called 2 returned 100% blocks executed 100%
+        2:   41:    void setTailLimit(int _tailLimit) {
+        2:   42:        Config::tailLimit = _tailLimit;
+        2:   43:    }
+        -:   44:
+function _ZN6Config14setRejectLimitEi called 2 returned 100% blocks executed 100%
+        2:   45:    void setRejectLimit(int _rejectLimit) {
+        2:   46:        Config::rejectLimit = _rejectLimit;
+        2:   47:    }
+        -:   48:
+function _ZN6Config8setStateE7configs called 2 returned 100% blocks executed 100%
+        2:   49:    void setState(configs _state) {
+        2:   50:        Config::state = _state;
+        2:   51:    }
+        -:   52:
+        -:   53:    void setFilePath(const string &_filePath) {
+        -:   54:        Config::filePath = _filePath;
+        -:   55:    }
+        -:   56:
+        -:   57:
+        -:   58:    const string &getFilePath() const {
+        -:   59:        return filePath;
+        -:   60:    }
+        -:   61:
+        -:   62:    bool isRing() const {
+        -:   63:        return ring;
+        -:   64:    }
+        -:   65:
+        -:   66:    int getHeadLimit() const {
+        -:   67:        return headLimit;
+        -:   68:    }
+        -:   69:
+        -:   70:    int getTailLimit() const {
+        -:   71:        return tailLimit;
+        -:   72:    }
+        -:   73:
+        -:   74:    int getRejectLimit() const {
+        -:   75:        return rejectLimit;
+        -:   76:    }
+        -:   77:
+        -:   78:    configs getState() const {
+        -:   79:        return state;
+        -:   80:    }
+        -:   81:
+        -:   82:    friend ostream &operator<<(ostream &os, const Config &config) {
+        -:   83:        os << "ring: " << config.ring << " headLimit: " << config.headLimit << " tailLimit: " << config.tailLimit
+        -:   84:           << " rejectLimit: " << config.rejectLimit << " state: " << config.state << " filePath: " << config.filePath;
+        -:   85:        return os;
+        -:   86:    }
+        -:   87:
+        -:   88:};
+        -:   89:
+        -:   90:
+        -:   91:#endif //LIST_CONFIG_H

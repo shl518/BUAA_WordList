@@ -1,0 +1,151 @@
+        -:    0:Source:F:/develop/src/core/Graph.cpp
+        -:    0:Graph:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\Graph.cpp.gcno
+        -:    0:Data:F:\develop\cmake-build-debug-coverage\CMakeFiles\coretest.dir\src\core\Graph.cpp.gcda
+        -:    0:Runs:1
+        -:    1://
+        -:    2:// Created by cychen on 2023/3/7.
+        -:    3://
+        -:    4:
+        -:    5:#include "Graph.h"
+        -:    6:#include "../preprocess/Config.h"
+function _ZN5GraphC2Ev called 23 returned 100% blocks executed 59%
+      621:    7:Graph::Graph() {
+       23:    7-block  0
+call    0 returned 23
+      598:    7-block  1
+call    1 returned 598
+      621:    7-block  2
+branch  2 taken 598
+branch  3 taken 23 (fallthrough)
+    $$$$$:    7-block  3
+    $$$$$:    7-block  4
+call    4 never executed
+       23:    8:    edgeCnt = 0;
+       23:    9:    edges = *new vector<Word>;
+       23:    9-block  0
+call    0 returned 23
+branch  1 taken 23 (fallthrough)
+branch  2 taken 0 (throw)
+       23:    9-block  1
+call    3 returned 23
+call    4 returned 23
+branch  5 taken 23 (fallthrough)
+branch  6 taken 0 (throw)
+       23:   10:    memset(pointSelfLoopCnt, 0, sizeof(pointSelfLoopCnt));
+       23:   11:    memset(indegree, 0, sizeof(indegree));
+       23:   12:    memset(pointSelfLoopCharNum, 0, sizeof(pointSelfLoopCharNum));
+       23:   13:}
+       23:   13-block  0
+    $$$$$:   13-block  1
+branch  0 never executed
+branch  1 never executed
+    $$$$$:   13-block  2
+branch  2 never executed
+branch  3 never executed
+    $$$$$:   13-block  3
+call    4 never executed
+        -:   14:
+function _ZN5GraphC2ERSt6vectorI4WordSaIS1_EEb called 25 returned 100% blocks executed 64%
+      675:   15:Graph::Graph(vector<Word> &edges,bool banReject) : edges() {
+       25:   15-block  0
+call    0 returned 25
+      650:   15-block  1
+call    1 returned 650
+      675:   15-block  2
+branch  2 taken 650
+branch  3 taken 25 (fallthrough)
+    $$$$$:   15-block  3
+    $$$$$:   15-block  4
+call    4 never executed
+       25:   16:    this->edgeCnt = 0;
+       25:   17:    memset(pointSelfLoopCnt, 0, sizeof(pointSelfLoopCnt));
+       25:   18:    memset(indegree, 0, sizeof(indegree));
+       25:   19:    memset(pointSelfLoopCharNum, 0, sizeof(pointSelfLoopCharNum));
+       67:   20:    for (auto &edge: edges) {
+       25:   20-block  0
+call    0 returned 25
+call    1 returned 25
+       42:   20-block  1
+call    2 returned 42
+       42:   20-block  2
+call    3 returned 42
+       67:   20-block  3
+call    4 returned 67
+branch  5 taken 42
+branch  6 taken 25 (fallthrough)
+       42:   21:        this->addEdge(edge,banReject);
+call    0 returned 42
+branch  1 taken 42 (fallthrough)
+branch  2 taken 0 (throw)
+        -:   22:    }
+       25:   23:}
+       25:   23-block  0
+    $$$$$:   23-block  1
+branch  0 never executed
+branch  1 never executed
+    $$$$$:   23-block  2
+branch  2 never executed
+branch  3 never executed
+    $$$$$:   23-block  3
+call    4 never executed
+        -:   24:
+        -:   25:
+function _ZN5Graph7addEdgeER4Wordb called 42 returned 100% blocks executed 91%
+       42:   26:int Graph::addEdge(Word& word,bool banRejectLimit) {
+       42:   27:    int r = 0;
+       42:   28:    int start = word.getBegin();
+       42:   28-block  0
+call    0 returned 42
+       42:   29:    Config *config = Config::getInstance();
+call    0 returned 42
+      42*:   30:    if(!banRejectLimit && start == config->getRejectLimit()){
+branch  0 taken 39 (fallthrough)
+branch  1 taken 3
+       39:   30-block  0
+call    2 returned 39
+branch  3 taken 0 (fallthrough)
+branch  4 taken 39
+    %%%%%:   30-block  1
+       42:   30-block  2
+       42:   30-block  3
+branch  5 taken 0 (fallthrough)
+branch  6 taken 42
+    #####:   31:        return 0;//没有ban并且reject，就不添加
+    %%%%%:   31-block  0
+        -:   32:    }
+        -:   33:
+       42:   34:    word.setId(this->edgeCnt);
+       42:   34-block  0
+call    0 returned 42
+       42:   35:    edges.push_back(word);
+call    0 returned 42
+       42:   36:    adj[start].push_back(edgeCnt);
+call    0 returned 42
+       42:   37:    this->edgeCnt += 1;
+        -:   38:    //自环暂时不计入入度的计数，入度列表目前仅用于topstort
+       42:   39:    if (word.getAnEnd() != word.getBegin()) {
+call    0 returned 42
+call    1 returned 42
+branch  2 taken 27 (fallthrough)
+branch  3 taken 15
+        -:   40:        //非自环计入入度
+       27:   41:        indegree[word.getAnEnd()]++;
+       27:   41-block  0
+call    0 returned 27
+        -:   42:    } else {
+        -:   43:        //自环计入自环数,同时计入该点的自环字母总数
+       15:   44:        pointSelfLoopCnt[word.getBegin()]++;
+       15:   44-block  0
+call    0 returned 15
+       15:   45:        pointSelfLoopCharNum[word.getBegin()] += word.getLength();
+call    0 returned 15
+call    1 returned 15
+        -:   46:    }
+       42:   47:    return r;
+       42:   47-block  0
+        -:   48:}
+        -:   49:
+function _ZN5Graph10subIndgreeEi called 5 returned 100% blocks executed 100%
+        5:   50:void Graph::subIndgree(int point) {
+        5:   51:    indegree[point] -= 1;
+        5:   52:}
